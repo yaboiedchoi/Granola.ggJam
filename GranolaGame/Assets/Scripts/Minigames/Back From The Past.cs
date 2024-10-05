@@ -58,11 +58,11 @@ public class BackFromThePast : MonoBehaviour
    
     void CheckCollision()
     {
-        if ()
-        {
-            Time.timeScale = 0;
-            Debug.Log("DEAD");
-        }
+        //if ()
+        //{
+        //    Time.timeScale = 0;
+        //    Debug.Log("DEAD");
+        //}
     }
     
     void InstantiateObjects()
