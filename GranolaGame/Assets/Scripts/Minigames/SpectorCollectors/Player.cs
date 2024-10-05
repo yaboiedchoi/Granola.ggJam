@@ -10,25 +10,21 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
 
     [SerializeField]
-    GameObject vacuum;
-
-    private BoxCollider2D vacuumCollider;
-
-    [SerializeField]
-    GameObject ghost;
-
-    private BoxCollider2D ghostCollider;
-
-    [SerializeField]
     float speed;  // movement speed amount
     
     [SerializeField]
     float jump;  // jump speed amount
 
+    [SerializeField]  // vacuum from player
+    GameObject vacuum;
+
+
+    private float elapsedTime = 0.0f;
+    private float cooldown = 0.2f;
+
+
     private bool isFacingRight = true;  // which way is player facing bool
-
     private bool isJumping;  // is player jumping bool
-
     private float move; // -1 if going left, 0 if not moving, 1 if going right
 
 
@@ -36,17 +32,13 @@ public class Player : MonoBehaviour
     // Update Method
     void Update()
     {
+        elapsedTime += Time.deltaTime;
+
         move = Input.GetAxis("Horizontal");  // get which way player is moving
 
         Flip();  // flips player
 
         rb.velocity = new Vector2(speed * move, rb.velocity.y);  // get velocity vector
-
-        // add force if you jump
-        if (Input.GetButtonDown("Jump") && isJumping == false)
-        {
-            rb.AddForce(new Vector2(rb.velocity.x, jump));
-        }
 
         // if J is pressed vacuum shows
         if (Input.GetKeyDown(KeyCode.J))
@@ -60,9 +52,21 @@ public class Player : MonoBehaviour
             vacuum.SetActive(false);
         }
 
-        VacuumHitGhost();  // check if vacuum collides with ghost, and if it does, ghost disappears
+        // if cooldown has passed you have the option to jump
+        if (elapsedTime > cooldown)
+        {
+            // add force if you jump
+            if (Input.GetButtonDown("Jump") && isJumping == false)
+            {
+                rb.AddForce(new Vector2(rb.velocity.x, jump));
 
+                isJumping = true;
+
+                elapsedTime = 0.0f;
+            }
+        }
     }
+
 
 
     // if colliding isJumping is false
@@ -71,25 +75,6 @@ public class Player : MonoBehaviour
         isJumping = false;
     }
 
-
-    // if not colliding isJumping is true
-    private void OnCollisionExit2D(Collision2D other) 
-    {
-        isJumping = true;
-    }
-
-
-    // vacuum collding with ghost method
-    private void VacuumHitGhost()
-    {
-        vacuumCollider = vacuum.GetComponent<BoxCollider2D>();
-        ghostCollider = ghost.GetComponent<BoxCollider2D>();
-
-        if (vacuumCollider.IsTouching(ghostCollider) || ghostCollider.IsTouching(vacuumCollider))
-        {
-            ghost.SetActive(false);
-        }
-    }
 
 
     // flips player method
