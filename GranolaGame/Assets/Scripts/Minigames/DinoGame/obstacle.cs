@@ -21,7 +21,6 @@ public class obstacle : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("NextLine"))
         {
-            Debug.Log("running");
             obstacleGenerator.RandomizeSpace();
         }
     }
