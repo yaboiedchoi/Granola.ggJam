@@ -8,11 +8,18 @@ public class FigureFable : MonoBehaviour
 {
     [SerializeField] TMP_Text stopStartText;
     [SerializeField] TMP_Text keyPressText;
-    [SerializeField] SpriteRenderer SpriteRenderer;
+    [SerializeField] SpriteRenderer Background;
     [SerializeField] GameObject toy;
     float interval;
     [SerializeField] bool redlight;
     [SerializeField] float timer;
+
+    // sprites
+    [SerializeField] Sprite standng;
+    [SerializeField] Sprite playDead;
+    [SerializeField] Sprite noArnold;
+    [SerializeField] Sprite yesArnold;
+
     string keyCode = " ";
     int key;
 
@@ -22,7 +29,7 @@ public class FigureFable : MonoBehaviour
         // Set the variables to their initial states
         stopStartText.text = "ARNOLD ISN'T LOOKING";
         redlight = false;
-        SpriteRenderer.color = Color.green;
+        Background.sprite = noArnold;
         interval = 1f;
     }
 
@@ -49,16 +56,15 @@ public class FigureFable : MonoBehaviour
 
             // Change text to arnold isnt looking and sprite to looking away
             stopStartText.text = "ARNOLD ISN'T LOOKING!";
-            SpriteRenderer.color = Color.green;
+            Background.sprite = noArnold;
 
             // Sets toy upright 
-            toy.transform.rotation = Quaternion.Euler(Vector3.forward * 0);
+            toy.GetComponent<SpriteRenderer>().sprite = standng;
         }
         else
         {
             // Change text to play dead and sprite to looking at screen
-            stopStartText.text = "PLAY DEAD!";
-            SpriteRenderer.color = Color.red;
+            Background.sprite = yesArnold;
            
             // Increase the timer
             timer += Time.deltaTime;
@@ -67,7 +73,7 @@ public class FigureFable : MonoBehaviour
             if (timer > 1.0f && toy.transform.localRotation.z == 0)
             {
                 Debug.Log("FAIL");
-                keyPressText.text = " ";
+                stopStartText.text = " ";
                 key = 6;
                 return;
             }
@@ -75,23 +81,23 @@ public class FigureFable : MonoBehaviour
             switch (key)
             {
                 case 0:
-                    keyPressText.text = "PRESS A";
+                    stopStartText.text = "PRESS A";
                     keyCode = "a";
                     break;
                 case 1:
-                    keyPressText.text = "PRESS S";
+                    stopStartText.text = "PRESS S";
                     keyCode = "s";
                     break;
                 case 2:
-                    keyPressText.text = "PRESS D";
+                    stopStartText.text = "PRESS D";
                     keyCode = "d";
                     break;
                 case 3:
-                    keyPressText.text = "PRESS W";
+                    stopStartText.text = "PRESS W";
                     keyCode = "w";
                     break;
                 case 4:
-                    keyPressText.text = "PRESS SPACE";
+                    stopStartText.text = "PRESS SPACE";
                     // When user presses space the toy lays down
                     keyCode = "space";
                     break;
@@ -101,8 +107,8 @@ public class FigureFable : MonoBehaviour
 
             if (Input.GetKeyDown(keyCode))
             {
-                toy.transform.rotation = Quaternion.Euler(Vector3.forward * 90);
-                keyPressText.text = " ";
+                toy.GetComponent <SpriteRenderer>().sprite = playDead;
+                stopStartText.text = " ";
                 key = 6;
             }
         }
