@@ -117,15 +117,15 @@ public class FigureFable : MonoBehaviour
                 stopStartText.text = " ";
                 key = 6;
             }
-            //// if any other key is pressed thats not the correct one
-            //if (!Input.GetKeyDown(keyCode) && Input.anyKeyDown) 
-            //{
-            //    Debug.Log("FAIL: Wrong key pressed");
-            //    stopStartText.text = " ";
-            //    key = 6;
-            //    Manager.Instance.EndMiniGame(false, true);
-            //    return;
-            // }
+            // if any other key is pressed thats not the correct one
+            if (!Input.GetKeyDown(keyCode) && Input.anyKeyDown)
+            {
+                Debug.Log("FAIL: Wrong key pressed");
+                stopStartText.text = " ";
+                key = 6;
+                Manager.Instance.EndMiniGame(false, true);
+                return;
+            }
         }
 
         if (Manager.Instance.MiniGameTime <= 0)
