@@ -24,7 +24,6 @@ public class playerScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !(jumpCount == 0))
         {
-            Debug.Log("Running");
             rigidBody.AddForce(Vector2.up * jumpAmount);
             jumpCount--;
         }
@@ -37,8 +36,11 @@ public class playerScript : MonoBehaviour
         {
             jumpCount = 2;
         }
+    }
 
-        if (collision.gameObject.CompareTag("Obstacle"))
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Velociraptor"))
         {
             Debug.Log("EndGame");
         }

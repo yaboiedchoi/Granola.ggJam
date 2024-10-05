@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObstacleGenerator : MonoBehaviour
 {
     public GameObject obstacle;
+    public GameObject flyObstacle;
 
     public float speed = 12;
 
@@ -27,7 +28,17 @@ public class ObstacleGenerator : MonoBehaviour
     //generates each obstacle from a prefab
     private void GenerateObstacle()
     {
-        GameObject obstacleInstance = Instantiate(obstacle, transform.position, transform.rotation);
-        obstacleInstance.GetComponent<obstacle>().obstacleGenerator = this;
+        GameObject obstacleInstance;
+
+        if (Random.Range(0.0f, 1.0f) <= 0.5f)
+        {
+            obstacleInstance = Instantiate(obstacle, transform.position, transform.rotation);
+            obstacleInstance.GetComponent<obstacle>().obstacleGenerator = this;
+        }
+        else
+        {
+            obstacleInstance = Instantiate(flyObstacle, transform.position + new Vector3(0.0f, 2.3f, 0.0f), transform.rotation);
+            obstacleInstance.GetComponent<obstacle>().obstacleGenerator = this;
+        }
     }
 }
