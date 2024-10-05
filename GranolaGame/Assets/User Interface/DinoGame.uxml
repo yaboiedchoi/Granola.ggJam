@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/User%20Interface/DinoStyle.uss?fileID=7433441132597879392&amp;guid=be3a5a314293a094dbbac3f0576ea83f&amp;type=3#DinoStyle" />
+    <ui:VisualElement name="UIPanel" style="align-self: center; justify-content: space-around; height: 450px; width: 349px; align-items: center;">
+        <ui:Label tabindex="-1" text="Avoid the Dinosaur" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Message" class="label" style="-unity-font: url(&apos;project://database/Assets/TextMesh%20Pro/Examples%20&amp;%20Extras/Fonts/Electronic%20Highway%20Sign.TTF?fileID=12800000&amp;guid=8a2b9e2a607dd2143b58c44bc32410b4&amp;type=3#Electronic Highway Sign&apos;); font-size: 25px; color: rgb(255, 255, 255);" />
+    </ui:VisualElement>
+</ui:UXML>
