@@ -168,6 +168,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
+  lives: 3
+  timeDecreaseMultiplier: 0.9
+  playbackSpeed: 0
+  gameState: 0
+  listOfGames: []
+  miniGameTime: 0
+  miniGameTimeMax: 10
+  stingerTime: 0
+  stingerTimeMax: 2
+  win: 0
+  roundNumber: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
