@@ -24,7 +24,6 @@ public class playerScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !(jumpCount == 0))
         {
-            Debug.Log("Running");
             rigidBody.AddForce(Vector2.up * jumpAmount);
             jumpCount--;
         }

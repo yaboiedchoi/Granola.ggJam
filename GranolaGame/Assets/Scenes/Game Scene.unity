@@ -170,15 +170,24 @@ MonoBehaviour:
   score: 0
   lives: 3
   timeDecreaseMultiplier: 0.9
-  playbackSpeed: 0
   gameState: 0
-  listOfGames: []
+  listOfGames:
+  - {fileID: 1925571162881195001, guid: 499bdbe2b4c7e42468b65eeafc70b495, type: 3}
+  - {fileID: 1925571162881195001, guid: 499bdbe2b4c7e42468b65eeafc70b495, type: 3}
+  - {fileID: 1925571162881195001, guid: 499bdbe2b4c7e42468b65eeafc70b495, type: 3}
+  - {fileID: 5905869064904336091, guid: 257e6dc1cb2ae41b298a1714fa1715d9, type: 3}
+  - {fileID: 5905869064904336091, guid: 257e6dc1cb2ae41b298a1714fa1715d9, type: 3}
+  - {fileID: 5905869064904336091, guid: 257e6dc1cb2ae41b298a1714fa1715d9, type: 3}
+  currentGame: {fileID: 0}
   miniGameTime: 0
   miniGameTimeMax: 10
   stingerTime: 0
   stingerTimeMax: 2
   win: 0
   roundNumber: 0
+  currentGameIndex: 0
+  previousGameIndex: -1
+  previousGameIndex2: -1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

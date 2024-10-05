@@ -8,11 +8,19 @@ public class FigureFable : MonoBehaviour
 {
     [SerializeField] TMP_Text stopStartText;
     [SerializeField] TMP_Text keyPressText;
-    [SerializeField] SpriteRenderer SpriteRenderer;
+    [SerializeField] SpriteRenderer Background;
+    [SerializeField] SpriteRenderer toyRender;
     [SerializeField] GameObject toy;
     float interval;
     [SerializeField] bool redlight;
-    [SerializeField] float timer;
+    [SerializeField] float timer = 0;
+
+    // sprites
+    [SerializeField] Sprite standng;
+    [SerializeField] Sprite playDead;
+    [SerializeField] Sprite noArnold;
+    [SerializeField] Sprite yesArnold;
+
     string keyCode = " ";
     int key;
 
@@ -22,7 +30,7 @@ public class FigureFable : MonoBehaviour
         // Set the variables to their initial states
         stopStartText.text = "ARNOLD ISN'T LOOKING";
         redlight = false;
-        SpriteRenderer.color = Color.green;
+        Background.sprite = noArnold;
         interval = 1f;
     }
 
@@ -31,12 +39,11 @@ public class FigureFable : MonoBehaviour
     {
         // Decreases interval every frame
         interval -= Time.deltaTime;
-
         // When the interval is less than 0 change the red light and reset interval to a random float
         if (interval < 0)
         {
             redlight = !redlight;
-            interval = Random.Range(1.5f, 2.0f);
+            interval = Random.Range(0.15f * Manager.Instance.MiniGameTimeMax, 0.2f * Manager.Instance.MiniGameTimeMax);
             
             // Changes the logic of the redlight
             RedLightGreenLight();
@@ -49,49 +56,39 @@ public class FigureFable : MonoBehaviour
 
             // Change text to arnold isnt looking and sprite to looking away
             stopStartText.text = "ARNOLD ISN'T LOOKING!";
-            SpriteRenderer.color = Color.green;
+            Background.sprite = noArnold;
 
             // Sets toy upright 
-            toy.transform.rotation = Quaternion.Euler(Vector3.forward * 0);
+            toy.GetComponent<SpriteRenderer>().sprite = standng;
         }
         else
         {
             // Change text to play dead and sprite to looking at screen
-            stopStartText.text = "PLAY DEAD!";
-            SpriteRenderer.color = Color.red;
+            Background.sprite = yesArnold;
            
-            // Increase the timer
-            timer += Time.deltaTime;
 
-            // When the timer goes above the value below and the player has not laid down, they fail
-            if (timer > 1.0f && toy.transform.localRotation.z == 0)
-            {
-                Debug.Log("FAIL");
-                keyPressText.text = " ";
-                key = 6;
-                return;
-            }
+            
 
             switch (key)
             {
                 case 0:
-                    keyPressText.text = "PRESS A";
+                    stopStartText.text = "PRESS A";
                     keyCode = "a";
                     break;
                 case 1:
-                    keyPressText.text = "PRESS S";
+                    stopStartText.text = "PRESS S";
                     keyCode = "s";
                     break;
                 case 2:
-                    keyPressText.text = "PRESS D";
+                    stopStartText.text = "PRESS D";
                     keyCode = "d";
                     break;
                 case 3:
-                    keyPressText.text = "PRESS W";
+                    stopStartText.text = "PRESS W";
                     keyCode = "w";
                     break;
                 case 4:
-                    keyPressText.text = "PRESS SPACE";
+                    stopStartText.text = "PRESS SPACE";
                     // When user presses space the toy lays down
                     keyCode = "space";
                     break;
@@ -99,12 +96,41 @@ public class FigureFable : MonoBehaviour
                     break;
             }
 
+            // When the timer goes above the value below and the player has not laid down, they fail
+            if (timer >= 1.0f && toyRender.sprite == standng)
+            {
+                Debug.Log("FAIL: Not pressed in time");
+                stopStartText.text = " ";
+                key = 6;
+                Manager.Instance.EndMiniGame(false, true);
+                return;
+            }
+
+
+            // Increase the timer
+            timer += Time.deltaTime;
+
+            // if correct key is pressed
             if (Input.GetKeyDown(keyCode))
             {
-                toy.transform.rotation = Quaternion.Euler(Vector3.forward * 90);
-                keyPressText.text = " ";
+                toy.GetComponent <SpriteRenderer>().sprite = playDead;
+                stopStartText.text = " ";
                 key = 6;
             }
+            //// if any other key is pressed thats not the correct one
+            //if (!Input.GetKeyDown(keyCode) && Input.anyKeyDown) 
+            //{
+            //    Debug.Log("FAIL: Wrong key pressed");
+            //    stopStartText.text = " ";
+            //    key = 6;
+            //    Manager.Instance.EndMiniGame(false, true);
+            //    return;
+            // }
+        }
+
+        if (Manager.Instance.MiniGameTime <= 0)
+        {
+            Manager.Instance.EndMiniGame(true, true);
         }
     }
 
