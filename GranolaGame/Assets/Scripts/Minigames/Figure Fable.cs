@@ -11,17 +11,19 @@ public class FigureFable : MonoBehaviour
     [SerializeField] SpriteRenderer SpriteRenderer;
     [SerializeField] GameObject toy;
     float interval;
-    bool redlight;
-    float timer;
+    [SerializeField] bool redlight;
+    [SerializeField] float timer;
+    string keyCode = " ";
+    int key;
 
     // Start is called before the first frame update
     void Start()
     {
         // Set the variables to their initial states
-        stopStartText.text = "PLAY DEAD!";
-        redlight = true;
-        SpriteRenderer.color = Color.red;
-        timer = 0;
+        stopStartText.text = "ARNOLD ISN'T LOOKING";
+        redlight = false;
+        SpriteRenderer.color = Color.green;
+        interval = 1f;
     }
 
     // Update is called once per frame
@@ -37,14 +39,9 @@ public class FigureFable : MonoBehaviour
             interval = Random.Range(1.5f, 2.0f);
             
             // Changes the logic of the redlight
-            redLightGreenLight(redlight);
+            RedLightGreenLight();
         }
-       
-       
-    }
 
-    void redLightGreenLight(bool redlight)
-    {
         if (!redlight)
         {
             // Reset timer
@@ -53,7 +50,7 @@ public class FigureFable : MonoBehaviour
             // Change text to arnold isnt looking and sprite to looking away
             stopStartText.text = "ARNOLD ISN'T LOOKING!";
             SpriteRenderer.color = Color.green;
-            
+
             // Sets toy upright 
             toy.transform.rotation = Quaternion.Euler(Vector3.forward * 0);
         }
@@ -62,58 +59,58 @@ public class FigureFable : MonoBehaviour
             // Change text to play dead and sprite to looking at screen
             stopStartText.text = "PLAY DEAD!";
             SpriteRenderer.color = Color.red;
+           
+            // Increase the timer
+            timer += Time.deltaTime;
 
-            // Generate one of 5 different keys for the event
-            int key = Random.Range(0, 5);
-            string keyCode = " ";
-            timer = 0;
-            bool stop = true;
-            
-            while (stop)
+            // When the timer goes above the value below and the player has not laid down, they fail
+            if (timer > 1.0f && toy.transform.localRotation.z == 0)
             {
-                // Increase the timer
-                timer += Time.deltaTime;
+                Debug.Log("FAIL");
+                keyPressText.text = " ";
+                key = 6;
+                return;
+            }
 
-                // When the timer goes above the value below and the player has not laid down, they fail
-                if (timer > 20.0f && toy.transform.localRotation.z == 0)
-                {
-                    Debug.Log("FAIL");
-                    //return;
-                }
-                
-                switch (key)
-                {
-                    case 0:
-                        keyPressText.text = "PRESS A";
-                        keyCode = "a";
-                        break;
-                    case 1:
-                        keyPressText.text = "PRESS S";
-                        keyCode = "s";
-                        break;
-                    case 2:
-                        keyPressText.text = "PRESS D";
-                        keyCode = "d";
-                        break;
-                    case 3:
-                        keyPressText.text = "PRESS W";
-                        keyCode = "w";
-                        break;
-                    case 4:
-                        keyPressText.text = "PRESS SPACE";
-                        // When user presses space the toy lays down
-                        keyCode = "space";
-                        break;
-                }
-                
-                if (Input.GetKeyDown(keyCode))
-                {
-                    toy.transform.rotation = Quaternion.Euler(Vector3.forward * 90);
-                    keyPressText.text = " ";
-                    stop = false;
-                }
-                
+            switch (key)
+            {
+                case 0:
+                    keyPressText.text = "PRESS A";
+                    keyCode = "a";
+                    break;
+                case 1:
+                    keyPressText.text = "PRESS S";
+                    keyCode = "s";
+                    break;
+                case 2:
+                    keyPressText.text = "PRESS D";
+                    keyCode = "d";
+                    break;
+                case 3:
+                    keyPressText.text = "PRESS W";
+                    keyCode = "w";
+                    break;
+                case 4:
+                    keyPressText.text = "PRESS SPACE";
+                    // When user presses space the toy lays down
+                    keyCode = "space";
+                    break;
+                default:
+                    break;
+            }
+
+            if (Input.GetKeyDown(keyCode))
+            {
+                toy.transform.rotation = Quaternion.Euler(Vector3.forward * 90);
+                keyPressText.text = " ";
+                key = 6;
             }
         }
+    }
+
+    void RedLightGreenLight()
+    {
+        // Generate one of 5 different keys for the event
+        key = Random.Range(0, 5);
     }
 }
