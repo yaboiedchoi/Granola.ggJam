@@ -8,8 +8,27 @@ public enum GameState {
     DefeatStinger,
     GameOver
 }
-public class Manager : Singleton<Manager>
+// public class Manager : Singleton<Manager>
+
+public class Manager : MonoBehaviour
 {
+    // singleton
+    private static Manager _instance;
+
+    public static Manager Instance { get { return _instance; } }
+
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        } else {
+            _instance = this;
+        }
+    }
+    
+    // fields
     [SerializeField] private int score = 0;
     [SerializeField] private int lives = 3;
     
@@ -17,6 +36,7 @@ public class Manager : Singleton<Manager>
     [SerializeField] private float playbackSpeed;
     [SerializeField] private GameState gameState;
     [SerializeField] private List<GameObject> listOfGames;
+    [SerializeField] private GameObject currentGame;
 
     // timers
     [SerializeField] private float miniGameTime;
@@ -30,6 +50,16 @@ public class Manager : Singleton<Manager>
     [SerializeField] private bool win;
     [SerializeField] private int roundNumber = 0;
 
+    // properties
+    public float MiniGameTime {
+        get { return miniGameTime; }
+        set { miniGameTime = value; }
+    }
+
+    public float MiniGameTimeMax {
+        get { return miniGameTimeMax; }
+        set { miniGameTimeMax = value; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +68,7 @@ public class Manager : Singleton<Manager>
         miniGameTime = miniGameTimeMax;
         stingerTime = stingerTimeMax;
         win = false;
+        currentGame = Instantiate(listOfGames[0], Vector3.zero, Quaternion.identity);
     }
 
     // Update is called once per frame
@@ -45,44 +76,18 @@ public class Manager : Singleton<Manager>
     {
         switch (gameState) {
             case GameState.MiniGame:
-                // if the mini game time is greater than 0, decrease the time
+                // if the mini game time is greater than -2, decrease the time
                 if (miniGameTime >= 0) {
                     miniGameTime -= Time.deltaTime;
                 }
-                // if you win
-                if (win) {
-                    gameState = GameState.VictoryStinger;
-                    // decrease max time (not for the stingers)
-                    miniGameTimeMax *= timeDecreaseMultiplier;
-                    // debug
-                    Debug.Log("Victory Stinger");
-                    // increase the round number
-                    roundNumber++;
-                    // add to the score
-                    score += 100;
-                    // reset win state
-                    win = false;
-                    // reset timers
-                    ResetTimers();
-                }
-                // if loss / run out of time
-                else if (miniGameTime < 0 && !win) {
-                    gameState = GameState.DefeatStinger;
-                    // reset timers
-                    ResetTimers();
-
-                    Debug.Log("Defeat Stinger");
-
-                    // add round counter
-                    roundNumber++;
-
-                    // remove a life
-                    lives--;
-                    // if you run out of lives, game over
-                    if (lives == 0) {
-                        gameState = GameState.GameOver;
-                    } 
-                }
+                // // if you win
+                // if (win) {
+                //     gameState = GameState.VictoryStinger;
+                // }
+                // // if loss / run out of time
+                // else if (miniGameTime < 0 && !win) {
+                //     gameState = GameState.DefeatStinger;
+                // }
                 break;
             case GameState.VictoryStinger:
                 // count down stinger time
@@ -137,10 +142,43 @@ public class Manager : Singleton<Manager>
     public void EndMiniGame(bool didWin, bool endGameImmediately) {
         // end the game immediately when specified
         if (endGameImmediately) {
-            miniGameTime = -1.0f;
+            miniGameTime = -5.0f;
         }
         // set the win state
         win = didWin;
+        if (win) {
+            gameState = GameState.VictoryStinger;
+            // decrease max time (not for the stingers)
+            miniGameTimeMax *= timeDecreaseMultiplier;
+            // debug
+            Debug.Log("Victory Stinger");
+            // increase the round number
+            roundNumber++;
+            // add to the score
+            score += 100;
+            // reset win state
+            win = false;
+        }
+        else {
+            gameState = GameState.DefeatStinger;
+
+            Debug.Log("Defeat Stinger");
+
+            // add round counter
+            roundNumber++;
+
+            // remove a life
+            lives--;
+            // if you run out of lives, game over
+            if (lives == 0) {
+                gameState = GameState.GameOver;
+            } 
+        }
+
+        // destroy the current mini game
+        Destroy(currentGame);
+        // reset timers
+        ResetTimers();
     }
     public void ResetTimers() {
         miniGameTime = miniGameTimeMax;
