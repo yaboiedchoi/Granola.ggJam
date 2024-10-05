@@ -12,6 +12,7 @@ public class Shout : MonoBehaviour
     private SpriteRenderer doors;
     [SerializeField]
     private Sprite open;
+
     private Vector3 slasherPos = new Vector3(-3f, 0, 0);
 
 
@@ -19,7 +20,7 @@ public class Shout : MonoBehaviour
     float moveSpeed;
     float noiseSpeed;
 
-    Vector3 noiseLevel = new Vector3(0.6141f, 0f, 0.6141f);
+    Vector3 noiseLevel = new Vector3(0.06141f, .2f, 0.06141f);
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +37,7 @@ public class Shout : MonoBehaviour
         }
         
         slasher.transform.position = slasherPos;
-        noiseSpeed = moveSpeed;
+        noiseSpeed = moveSpeed/10;
     }
 
     // Update is called once per frame
@@ -55,10 +56,10 @@ public class Shout : MonoBehaviour
         noiseBar.transform.localScale = noiseLevel;
 
         //lose state
-        if (noiseLevel.y > 4)
+        if (noiseLevel.y > .4f)
         {
             doors.sprite = open;
-            noiseLevel.y = 4;
+            noiseLevel.y = .4f;
             slasherPos.x = -.1f;
         }
 
@@ -68,7 +69,7 @@ public class Shout : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            noiseLevel.y -= .5f;
+            noiseLevel.y -= .03f;
         }
 
         //win state
