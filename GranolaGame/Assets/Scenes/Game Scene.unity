@@ -172,7 +172,8 @@ MonoBehaviour:
   timeDecreaseMultiplier: 0.9
   playbackSpeed: 0
   gameState: 0
-  listOfGames: []
+  listOfGames:
+  - {fileID: 5905869064904336091, guid: 257e6dc1cb2ae41b298a1714fa1715d9, type: 3}
   miniGameTime: 0
   miniGameTimeMax: 10
   stingerTime: 0
