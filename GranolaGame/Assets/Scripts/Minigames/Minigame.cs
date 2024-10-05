@@ -15,5 +15,10 @@ public abstract class Minigame : MonoBehaviour
     {
         
     }
+    /// <summary>
+    /// Show controls for the upcoming minigame (shown when minigame starts)
+    /// 
+    /// </summary>
     public abstract void ShowControls();
+    public abstract void ShowAssets();
 }
