@@ -886,7 +886,7 @@ GameObject:
   - component: {fileID: 3796014050595507038}
   - component: {fileID: 1084885643929491828}
   m_Layer: 0
-  m_Name: Game
+  m_Name: Shout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
