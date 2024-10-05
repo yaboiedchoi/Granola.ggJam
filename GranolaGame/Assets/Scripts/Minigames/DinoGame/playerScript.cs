@@ -37,8 +37,11 @@ public class playerScript : MonoBehaviour
         {
             jumpCount = 2;
         }
+    }
 
-        if (collision.gameObject.CompareTag("Obstacle"))
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Velociraptor"))
         {
             Debug.Log("EndGame");
         }
