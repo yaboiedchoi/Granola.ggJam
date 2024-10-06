@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class ReturnMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void TheButton()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Manager.Instance.ReturnMenu();
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState {
     MiniGame,
@@ -63,6 +64,7 @@ public class Manager : MonoBehaviour
     // stinger items
     [SerializeField] private TMP_Text stingerScoreText;
     [SerializeField] private GameObject tvStatic;
+    [SerializeField] private GameObject returnButtonPrefab;
 
     // properties
     public float MiniGameTime {
@@ -202,6 +204,8 @@ public class Manager : MonoBehaviour
                     ResetTimers();
                     // reset max timers
                     ResetGame();
+                    GameObject button = Instantiate(returnButtonPrefab, GameObject.Find("Canvas").transform);
+                    button.SetActive(true);
                 }
                 break;
             default: 
@@ -342,5 +346,10 @@ public class Manager : MonoBehaviour
     public void SetStingerScore()
     {
         stingerScoreText.text = "Score: " + score;
+    }
+    public void ReturnMenu()
+    {
+        Debug.Log("Returning to menu");
+        SceneManager.LoadScene("Intro Scene");
     }
 }
