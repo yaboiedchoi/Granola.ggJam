@@ -40,6 +40,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4679608012001200730}
     m_Modifications:
+    - target: {fileID: 3310369579999962385, guid: 306aebab1940b01469da7ff2240babb1, type: 3}
+      propertyPath: m_text
+      value: FOLLOW THE MIDDLE
+      objectReference: {fileID: 0}
     - target: {fileID: 5504544063971233866, guid: 306aebab1940b01469da7ff2240babb1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
