@@ -19,5 +19,6 @@ public class CollisionHandler : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("You Lose");
+        Manager.Instance.EndMiniGame(false, true);
     }
 }

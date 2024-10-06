@@ -50,6 +50,11 @@ public class BackFromThePast : MonoBehaviour
             }
         }
 
+        if (Manager.Instance.MiniGameTime <= 0)
+        {
+            Debug.Log("WIN!!");
+            Manager.Instance.EndMiniGame(true, true);
+        }
     }
 
     void InstantiateObjects()
@@ -60,7 +65,7 @@ public class BackFromThePast : MonoBehaviour
             {
                 rand = Random.Range(-1, 2);
                 Vector3 randomVector = new Vector3(rand * 3, i * 15 + 11, 0);
-                obstacles[i,j] = Instantiate(obstacle, randomVector, Quaternion.identity);
+                obstacles[i,j] = Instantiate(obstacle, randomVector, Quaternion.identity, this.transform);
             }
 
 

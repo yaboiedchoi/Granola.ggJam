@@ -181,6 +181,12 @@ MonoBehaviour:
   - {fileID: 5905869064904336091, guid: 257e6dc1cb2ae41b298a1714fa1715d9, type: 3}
   - {fileID: 1124042569876413281, guid: 47514360e82634b6f86bcf2a49161c74, type: 3}
   - {fileID: 5342258920104530095, guid: 03c772d1e056148c1b966880520d2384, type: 3}
+  - {fileID: 118168354855098541, guid: a09a03d04e75a4b118ec9cf49d7b469c, type: 3}
+  - {fileID: 118168354855098541, guid: a09a03d04e75a4b118ec9cf49d7b469c, type: 3}
+  - {fileID: 118168354855098541, guid: a09a03d04e75a4b118ec9cf49d7b469c, type: 3}
+  - {fileID: 118168354855098541, guid: a09a03d04e75a4b118ec9cf49d7b469c, type: 3}
+  - {fileID: 118168354855098541, guid: a09a03d04e75a4b118ec9cf49d7b469c, type: 3}
+  - {fileID: 118168354855098541, guid: a09a03d04e75a4b118ec9cf49d7b469c, type: 3}
   currentGame: {fileID: 0}
   miniGameTime: 0
   miniGameTimeMax: 10
