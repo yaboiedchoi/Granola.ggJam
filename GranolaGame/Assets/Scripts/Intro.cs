@@ -14,6 +14,7 @@ public class Intro : MonoBehaviour
     [SerializeField] Slider sfxSlider;
     [SerializeField] Slider musicSlider;
     [SerializeField] TMP_Text highscoreText;
+    [SerializeField] AudioSource blipper;
 
     // Start is called before the first frame update
     void Start()
@@ -47,40 +48,54 @@ public class Intro : MonoBehaviour
         PlayerPrefs.SetFloat("Music Volume", musicSlider.value);
         SceneManager.LoadScene("Game Scene");
     }
-
+    public void PlayBlip()
+    {
+        blipper.Play();
+    }
     public void OpenCredits()
     {
         creditsCanvas.enabled = true;
         menuCanvas.enabled = false;
+        PlayBlip();
     }
 
     public void CloseCredits()
     {
         creditsCanvas.enabled = false;
         menuCanvas.enabled = true;
+        PlayBlip();
+
     }
 
     public void OpenOptions()
     {
         optionsCanvas.enabled = true;
         menuCanvas.enabled = false;
+        PlayBlip();
+
     }
 
     public void CloseOptions()
     {
         optionsCanvas.enabled = false;
         menuCanvas.enabled = true;
+        PlayBlip();
+
     }
 
     public void OpenHighscore()
     {
         highscoreCanvas.enabled = true;
         menuCanvas.enabled = false;
+        PlayBlip();
+
     }
 
     public void CloseHighscore()
     {
         highscoreCanvas.enabled = false;
         menuCanvas.enabled = true;
+        PlayBlip();
+
     }
 }

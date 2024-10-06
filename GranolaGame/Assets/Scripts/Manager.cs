@@ -224,6 +224,7 @@ public class Manager : MonoBehaviour
             // if you run out of lives, game over
             if (lives == 0) {
                 gameState = GameState.GameOver;
+                StopLoop();
                 oneshotPlayer.PlayOneShot((AudioClip)Resources.Load("Music/Global/Game Over Stinger"));
                 if(PlayerPrefs.GetInt("High Score") < score)
                 {
