@@ -41,7 +41,7 @@ public class BackFromThePast : MonoBehaviour
                 {
                     break;
                 }
-                obstacles[i,j].transform.position -= Vector3.up * speed * Time.deltaTime;
+                obstacles[i,j].transform.position -= (Vector3.up * speed * Time.deltaTime + new Vector3(0, 10 - Manager.Instance.MiniGameTimeMax, 0));
                 if (obstacles[i,j].transform.position.y < -8)
                 {
                     Destroy(obstacles[i,j]);
