@@ -266,8 +266,8 @@ public class Manager : MonoBehaviour
             gameState = GameState.DefeatStinger;
 
             Debug.Log("Defeat Stinger");
-            
 
+            StopLoop();
             // add round counter
             roundNumber++;
 
