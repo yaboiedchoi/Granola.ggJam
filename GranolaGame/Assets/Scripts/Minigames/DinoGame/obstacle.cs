@@ -9,7 +9,7 @@ public class obstacle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector2.left * obstacleGenerator.speed *  Time.deltaTime);
+        transform.Translate(Vector2.left * 0.8f * (13.0f - Manager.Instance.MiniGameTime) *  Time.deltaTime);
 
         if (transform.position.x < -15)
         {

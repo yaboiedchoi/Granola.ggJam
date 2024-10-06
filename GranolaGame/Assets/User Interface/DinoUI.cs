@@ -28,7 +28,6 @@ public class DinoUI : MonoBehaviour
         else
         {
             timer -= 10f * Time.deltaTime;
-            Debug.Log(timer);
         }
     }
 }
