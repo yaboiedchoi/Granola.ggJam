@@ -219,7 +219,7 @@ public class Manager : MonoBehaviour
             lives--;
 
             //delete a heart
-            Destroy(hearts[lives]);
+            // Destroy(hearts[lives]);
             // if you run out of lives, game over
             if (lives == 0) {
                 gameState = GameState.GameOver;
