@@ -13,12 +13,21 @@ public class Intro : MonoBehaviour
     [SerializeField] Canvas menuCanvas;
     [SerializeField] Canvas creditsCanvas;
     [SerializeField] Canvas optionsCanvas;
+    [SerializeField] Slider sfxSlider;
+    [SerializeField] Slider musicSlider;
 
     // Start is called before the first frame update
     void Start()
     {
         creditsCanvas.enabled = false;
         optionsCanvas.enabled = false;
+        if(!PlayerPrefs.HasKey("SFX Volume"))
+        {
+            PlayerPrefs.SetFloat("SFX Volume", 1f);
+            PlayerPrefs.SetFloat("Music Volume", 1f);
+        }
+        sfxSlider.value = PlayerPrefs.GetFloat("SFX Volume");
+        musicSlider.value = PlayerPrefs.GetFloat("Music Volume");
     }
 
     // Update is called once per frame
@@ -29,6 +38,8 @@ public class Intro : MonoBehaviour
 
     public void StartGame()
     {
+        PlayerPrefs.SetFloat("SFX Volume", sfxSlider.value);
+        PlayerPrefs.SetFloat("Music Volume", musicSlider.value);
         SceneManager.LoadScene("Game Scene");
     }
 

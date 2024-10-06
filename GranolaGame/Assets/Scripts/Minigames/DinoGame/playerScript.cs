@@ -7,6 +7,9 @@ public class playerScript : MonoBehaviour
     //bool for if the player is grounded
     private bool grounded = true;
 
+    //audio reference
+    AudioSource audioSource;
+
     //force applied when the player jumps
     [SerializeField]
     float jumpAmount = 555;
@@ -17,6 +20,7 @@ public class playerScript : MonoBehaviour
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -50,6 +54,7 @@ public class playerScript : MonoBehaviour
         {
             Manager.Instance.EndMiniGame(false, false);
             // Play stinger here
+            audioSource.Play();
         }
     }
 }

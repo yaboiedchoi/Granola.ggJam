@@ -79,8 +79,9 @@ public class Manager : MonoBehaviour
         stingerTime = stingerTimeMax;
         win = false;
         currentGameIndex = Random.Range(0, listOfGames.Count);
-        currentGame = Instantiate(listOfGames[currentGameIndex], Vector3.zero, Quaternion.identity); 
-
+        currentGame = Instantiate(listOfGames[currentGameIndex], Vector3.zero, Quaternion.identity);
+        oneshotPlayer.volume = PlayerPrefs.GetFloat("SFX Volume");
+        loopPlayer.volume = PlayerPrefs.GetFloat("Music Volume");
         // displaying the hearts
         for (int i = 0; i < lives; i++)
         {
@@ -224,6 +225,10 @@ public class Manager : MonoBehaviour
             if (lives == 0) {
                 gameState = GameState.GameOver;
                 oneshotPlayer.PlayOneShot((AudioClip)Resources.Load("Music/Global/Game Over Stinger"));
+                if(PlayerPrefs.GetInt("High Score") < score)
+                {
+                    PlayerPrefs.SetInt("High Score", score);
+                }
             }
             else
             {

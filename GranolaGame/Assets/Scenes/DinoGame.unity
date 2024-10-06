@@ -348,13 +348,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   lives: 3
+  scoreText: {fileID: 0}
+  heart: {fileID: 0}
   timeDecreaseMultiplier: 0.9
   gameState: 0
   listOfGames:
-  - {fileID: 6881637429883834685, guid: 38fa316dde3c64018819c5a16d18c9ad, type: 3}
-  - {fileID: 6881637429883834685, guid: 38fa316dde3c64018819c5a16d18c9ad, type: 3}
-  - {fileID: 6881637429883834685, guid: 38fa316dde3c64018819c5a16d18c9ad, type: 3}
-  - {fileID: 6881637429883834685, guid: 38fa316dde3c64018819c5a16d18c9ad, type: 3}
+  - {fileID: 1124042569876413281, guid: 47514360e82634b6f86bcf2a49161c74, type: 3}
+  - {fileID: 1124042569876413281, guid: 47514360e82634b6f86bcf2a49161c74, type: 3}
+  - {fileID: 1124042569876413281, guid: 47514360e82634b6f86bcf2a49161c74, type: 3}
+  - {fileID: 1124042569876413281, guid: 47514360e82634b6f86bcf2a49161c74, type: 3}
   currentGame: {fileID: 0}
   miniGameTime: 0
   miniGameTimeMax: 10

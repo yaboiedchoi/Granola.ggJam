@@ -851,6 +851,8 @@ MonoBehaviour:
   menuCanvas: {fileID: 1163599563}
   creditsCanvas: {fileID: 36109696}
   optionsCanvas: {fileID: 1330960545}
+  sfxSlider: {fileID: 1227249768}
+  musicSlider: {fileID: 1671058309}
 --- !u!4 &361842153
 Transform:
   m_ObjectHideFlags: 0
