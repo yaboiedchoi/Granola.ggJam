@@ -50,7 +50,7 @@ public class PrincesFiance : MonoBehaviour
         timelines.Add(timeline3);
 
         PickTimeline();
-        Manager.Instance.PlayLoop("Prices Fiance Loop");
+        Manager.Instance.PlayLoop("Princes Fiance Loop");
         // adds 2 seconds to minigame for shuffling
         Manager.Instance.MiniGameTime += 2.0f;
     }
@@ -70,6 +70,7 @@ public class PrincesFiance : MonoBehaviour
         // lose state (time runs out)
         if (Manager.Instance.MiniGameTime <= 0)
         {
+            Manager.Instance.StopLoop();
             Manager.Instance.EndMiniGame(false, true);
         }
     }
@@ -87,6 +88,7 @@ public class PrincesFiance : MonoBehaviour
     public void PickedPoison()
     {
         Debug.Log("YOU DIED");
+        Manager.Instance.StopLoop();
         Manager.Instance.EndMiniGame(false, true);
     }
 
@@ -95,6 +97,7 @@ public class PrincesFiance : MonoBehaviour
     public void PickedCorrect()
     {
         Debug.Log("correct!");
+        Manager.Instance.StopLoop();
         Manager.Instance.EndMiniGame(true, true);
     }
 

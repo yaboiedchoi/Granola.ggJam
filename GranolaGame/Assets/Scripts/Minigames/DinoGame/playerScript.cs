@@ -21,6 +21,7 @@ public class playerScript : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
+        Manager.Instance.PlayLoop("Dino World/DinoGameTheme");
     }
 
     // Update is called once per frame
@@ -52,9 +53,11 @@ public class playerScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Velociraptor"))
         {
+            Manager.Instance.StopLoop();
+            Manager.Instance.PlaySound("Dino Game/EndingSoundDG");
+            Manager.Instance.PlaySound("Dino Game/Velociraptor");
             Manager.Instance.EndMiniGame(false, false);
             // Play stinger here
-            audioSource.Play();
         }
     }
 }

@@ -7,7 +7,7 @@ public class DinoRun : Minigame
     // Start is called before the first frame update
     void Start()
     {
-        Manager.Instance.PlayLoop("");
+        
     }
 
     // Update is called once per frame
