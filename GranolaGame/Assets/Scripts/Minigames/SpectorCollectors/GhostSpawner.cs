@@ -57,6 +57,14 @@ public class GhostSpawner : MonoBehaviour
     void Update()
     {
         VacuumHitGhost();  // check if vacuum collides with ghost, and if it does, ghost disappears
+        if (spawnedGhosts.Count == 0)
+        {
+            Manager.Instance.EndMiniGame(true, true);
+        }
+        else if (Manager.Instance.MiniGameTime <= 0)
+        {
+            Manager.Instance.EndMiniGame(false, true);
+        }
     }
 
 
@@ -69,7 +77,7 @@ public class GhostSpawner : MonoBehaviour
         {
             int platformPick = Random.Range(0, platformLocations.Count);  // pick one of the platforms
             
-            GameObject newGhost = Instantiate(ghostPrefab, platformLocations[platformPick], Quaternion.identity); // spawn a ghost at that platform
+            GameObject newGhost = Instantiate(ghostPrefab, platformLocations[platformPick], Quaternion.identity, this.transform); // spawn a ghost at that platform
             spawnedGhosts.Add(newGhost);  // add new ghost to list
 
             platformLocations.RemoveAt(platformPick);  // Remove that platform from the list
@@ -90,8 +98,4 @@ public class GhostSpawner : MonoBehaviour
             }
         }
     }
-
-
-
-
 }

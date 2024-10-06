@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum GameState {
@@ -31,6 +33,9 @@ public class Manager : MonoBehaviour
     // fields
     [SerializeField] private int score = 0;
     [SerializeField] private int lives = 3;
+    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private GameObject heart;
+    private List<GameObject> hearts = new List<GameObject>();
     
     [SerializeField] private float timeDecreaseMultiplier = 0.9f;
     // [SerializeField] private float playbackSpeed;
@@ -52,6 +57,8 @@ public class Manager : MonoBehaviour
     [SerializeField] private int currentGameIndex;
     [SerializeField] private int previousGameIndex = -1;
     [SerializeField] private int previousGameIndex2 = -1;
+    [SerializeField] private AudioSource oneshotPlayer;
+    [SerializeField] private AudioSource loopPlayer;
 
     // properties
     public float MiniGameTime {
@@ -72,7 +79,14 @@ public class Manager : MonoBehaviour
         stingerTime = stingerTimeMax;
         win = false;
         currentGameIndex = Random.Range(0, listOfGames.Count);
-        currentGame = Instantiate(listOfGames[currentGameIndex], Vector3.zero, Quaternion.identity); 
+        currentGame = Instantiate(listOfGames[currentGameIndex], Vector3.zero, Quaternion.identity);
+        oneshotPlayer.volume = PlayerPrefs.GetFloat("SFX Volume");
+        loopPlayer.volume = PlayerPrefs.GetFloat("Music Volume");
+        // displaying the hearts
+        for (int i = 0; i < lives; i++)
+        {
+            //hearts.Add(Instantiate(heart, new Vector3(-5.38f, -4.39f + (.6f * i), 0), Quaternion.identity));
+        }
     }
 
     // Update is called once per frame
@@ -132,6 +146,7 @@ public class Manager : MonoBehaviour
                     stingerTime -= Time.deltaTime;
                 }
                 else {
+                    oneshotPlayer.PlayOneShot((AudioClip)Resources.Load("Music/Global/Game Over Loop"));
                     // reset timers
                     ResetTimers();
                     // reset max timers
@@ -140,10 +155,26 @@ public class Manager : MonoBehaviour
                 break;
             default: 
                 throw new System.Exception("Invalid game state");
-                break;
         }
     }
 
+    public void PlaySound(string path)
+    {
+        oneshotPlayer.PlayOneShot((AudioClip)Resources.Load("Music/" + path));
+    }
+    public void PlayLoop(string path)
+    {
+        loopPlayer.Stop();
+        loopPlayer.PlayOneShot((AudioClip)Resources.Load("Music/" + path));
+    }
+    public void StopLoop()
+    {
+        loopPlayer.Stop();
+    }
+    public void StopSounds()
+    {
+        oneshotPlayer.Stop();
+    }
     /// <summary>
     /// End the mini game
     /// </summary>
@@ -158,16 +189,21 @@ public class Manager : MonoBehaviour
         win = didWin;
         if (win) {
             gameState = GameState.VictoryStinger;
+            
             // decrease max time (not for the stingers)
             if (roundNumber % 5 == 0 && roundNumber != 0) 
                 miniGameTimeMax *= timeDecreaseMultiplier;
 
             // debug
+            StopSounds();
+            StopLoop();
             Debug.Log("Victory Stinger");
+            oneshotPlayer.PlayOneShot((AudioClip)Resources.Load("Music/Global/Victory Stinger"));
             // increase the round number
             roundNumber++;
             // add to the score
-            score += 100;
+            score += 1;
+            // scoreText.text = score.ToString();
             // reset win state
             win = false;
         }
@@ -175,16 +211,29 @@ public class Manager : MonoBehaviour
             gameState = GameState.DefeatStinger;
 
             Debug.Log("Defeat Stinger");
+            
 
             // add round counter
             roundNumber++;
 
             // remove a life
             lives--;
+
+            //delete a heart
+            // Destroy(hearts[lives]);
             // if you run out of lives, game over
             if (lives == 0) {
                 gameState = GameState.GameOver;
-            } 
+                oneshotPlayer.PlayOneShot((AudioClip)Resources.Load("Music/Global/Game Over Stinger"));
+                if(PlayerPrefs.GetInt("High Score") < score)
+                {
+                    PlayerPrefs.SetInt("High Score", score);
+                }
+            }
+            else
+            {
+                oneshotPlayer.PlayOneShot((AudioClip)Resources.Load("Music/Global/Life Lost"));
+            }
         }
 
         // destroy the current mini game
@@ -222,7 +271,7 @@ public class Manager : MonoBehaviour
             previousGameIndex2 = previousGameIndex;
             previousGameIndex = currentGameIndex;
 
-            return Instantiate(listOfGames[currentGameIndex], Vector3.zero, Quaternion.identity);
+            return Instantiate(listOfGames[currentGameIndex]);
         } 
         else {
             throw new System.Exception("Current game already exists!");
