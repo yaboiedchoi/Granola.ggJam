@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
                 isJumping = true;
 
                 elapsedTime = 0.0f;
+                Manager.Instance.PlaySound("Spector Collectors/Jump SFX");
             }
         }
     }

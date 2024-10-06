@@ -19,6 +19,7 @@ public class BackFromThePast : MonoBehaviour
     {
         position = "middle";
         obstacles = new GameObject[2,2];
+        Manager.Instance.PlayLoop("Back to the Past/Back to the Past Loop");
     }
 
     // Update is called once per frame

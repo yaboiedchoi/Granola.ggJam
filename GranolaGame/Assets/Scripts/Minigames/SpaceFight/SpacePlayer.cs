@@ -10,6 +10,7 @@ public class SpacePlayer : MonoBehaviour
     void Start()
     {
         playerSpeed = new Vector3(10f, 0f);
+        Manager.Instance.PlayLoop("Global Sounds/Hub Loop");
     }
 
     // Update is called once per frame

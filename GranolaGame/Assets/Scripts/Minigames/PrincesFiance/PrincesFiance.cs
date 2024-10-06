@@ -50,7 +50,7 @@ public class PrincesFiance : MonoBehaviour
         timelines.Add(timeline3);
 
         PickTimeline();
-
+        Manager.Instance.PlayLoop("Prices Fiance Loop");
         // adds 2 seconds to minigame for shuffling
         Manager.Instance.MiniGameTime += 2.0f;
     }

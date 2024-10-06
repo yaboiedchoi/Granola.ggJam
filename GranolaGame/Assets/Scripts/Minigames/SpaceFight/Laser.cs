@@ -41,6 +41,7 @@ public class Laser : MonoBehaviour
         {
             transform.position = new Vector3(UnityEngine.Random.Range(-4f, 4f),
                                             UnityEngine.Random.Range(6f, 15f));
+            Manager.Instance.PlaySound("Blaster Sound");
             //Debug.Log("HIT");
         }
     }

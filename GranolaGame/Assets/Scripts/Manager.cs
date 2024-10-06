@@ -197,7 +197,7 @@ public class Manager : MonoBehaviour
                     stingerTime -= Time.deltaTime;
                 }
                 else {
-                    oneshotPlayer.PlayOneShot((AudioClip)Resources.Load("Music/Global/Game Over Loop"));
+                    
                     // reset timers
                     ResetTimers();
                     // reset max timers
@@ -279,7 +279,8 @@ public class Manager : MonoBehaviour
                 gameState = GameState.GameOver;
                 StopLoop();
                 oneshotPlayer.PlayOneShot((AudioClip)Resources.Load("Music/Global/Game Over Stinger"));
-                if(PlayerPrefs.GetInt("High Score") < score)
+                PlayLoop("Global/Game Over Loop");
+                if (PlayerPrefs.GetInt("High Score") < score)
                 {
                     PlayerPrefs.SetInt("Highscore", score);
                 }

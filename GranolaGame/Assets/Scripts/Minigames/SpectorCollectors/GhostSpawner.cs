@@ -50,6 +50,7 @@ public class GhostSpawner : MonoBehaviour
         vacuumCollider = vacuum.GetComponent<BoxCollider2D>();  // get collider for vacuum
 
         SpawnGhost();
+        Manager.Instance.PlayLoop("Spector Collectors/Spector Collectors Loop");
     }
 
 

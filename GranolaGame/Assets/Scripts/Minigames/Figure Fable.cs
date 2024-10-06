@@ -45,7 +45,14 @@ public class FigureFable : MonoBehaviour
         {
             redlight = !redlight;
             interval = Random.Range(0.15f * Manager.Instance.MiniGameTimeMax, 0.2f * Manager.Instance.MiniGameTimeMax);
-            
+            if (redlight)
+            {
+                Manager.Instance.PlaySound("Figure Fable/Door Open");
+            }
+            else
+            {
+                Manager.Instance.PlaySound("Figure Fable/Door Shut");
+            }
             // Changes the logic of the redlight
             RedLightGreenLight();
         }
@@ -66,9 +73,9 @@ public class FigureFable : MonoBehaviour
         {
             // Change text to play dead and sprite to looking at screen
             Background.sprite = yesArnold;
-           
 
-            
+
+
 
             switch (key)
             {
@@ -114,7 +121,7 @@ public class FigureFable : MonoBehaviour
             // if correct key is pressed
             if (Input.GetKeyDown(keyCode))
             {
-                toy.GetComponent <SpriteRenderer>().sprite = playDead;
+                toy.GetComponent<SpriteRenderer>().sprite = playDead;
                 stopStartText.text = " ";
                 key = 6;
             }
