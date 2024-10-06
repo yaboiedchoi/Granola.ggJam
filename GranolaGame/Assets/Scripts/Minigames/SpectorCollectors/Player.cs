@@ -40,22 +40,22 @@ public class Player : MonoBehaviour
 
         rb.velocity = new Vector2(speed * move, rb.velocity.y);  // get velocity vector
 
-        // if J is pressed vacuum shows
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            vacuum.SetActive(true);
-        }
+        //// if J is pressed vacuum shows
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    vacuum.SetActive(true);
+        //}
 
-        // if J is released vacuum disappears
-        if (Input.GetKeyUp(KeyCode.J))
-        {
-            vacuum.SetActive(false);
-        }
+        //// if J is released vacuum disappears
+        //if (Input.GetKeyUp(KeyCode.Space))
+        //{
+        //    vacuum.SetActive(false);
+        //}
 
         // if cooldown has passed you have the option to jump
         if (elapsedTime > cooldown)
         {
-            // add force if you jump
+            // add force if you jump 
             if (Input.GetButtonDown("Jump") && isJumping == false)
             {
                 rb.AddForce(new Vector2(rb.velocity.x, jump));

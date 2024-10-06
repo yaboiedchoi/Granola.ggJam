@@ -140,7 +140,6 @@ public class Manager : MonoBehaviour
                 break;
             default: 
                 throw new System.Exception("Invalid game state");
-                break;
         }
     }
 
@@ -222,7 +221,7 @@ public class Manager : MonoBehaviour
             previousGameIndex2 = previousGameIndex;
             previousGameIndex = currentGameIndex;
 
-            return Instantiate(listOfGames[currentGameIndex], Vector3.zero, Quaternion.identity);
+            return Instantiate(listOfGames[currentGameIndex]);
         } 
         else {
             throw new System.Exception("Current game already exists!");
