@@ -7,12 +7,10 @@ using UnityEngine.UI;
 
 public class Intro : MonoBehaviour
 {
-    [SerializeField] Button playButton;
-    [SerializeField] Button creditButton;
-    [SerializeField] Button optionsButton;
     [SerializeField] Canvas menuCanvas;
     [SerializeField] Canvas creditsCanvas;
     [SerializeField] Canvas optionsCanvas;
+    [SerializeField] Canvas highscoreCanvas;
     [SerializeField] Slider sfxSlider;
     [SerializeField] Slider musicSlider;
 
@@ -21,6 +19,7 @@ public class Intro : MonoBehaviour
     {
         creditsCanvas.enabled = false;
         optionsCanvas.enabled = false;
+        highscoreCanvas.enabled = false;
         if(!PlayerPrefs.HasKey("SFX Volume"))
         {
             PlayerPrefs.SetFloat("SFX Volume", 1f);
@@ -64,6 +63,18 @@ public class Intro : MonoBehaviour
     public void CloseOptions() 
     {
         optionsCanvas.enabled = false;
+        menuCanvas.enabled = true;
+    }
+
+    public void OpenHighscore()
+    {
+        highscoreCanvas.enabled = true;
+        menuCanvas.enabled = false;
+    }
+
+    public void CloseHighscore()
+    {
+        highscoreCanvas.enabled = false;
         menuCanvas.enabled = true;
     }
 }
