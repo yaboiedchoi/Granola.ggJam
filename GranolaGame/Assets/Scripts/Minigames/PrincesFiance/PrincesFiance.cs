@@ -17,38 +17,64 @@ public class PrincesFiance : MonoBehaviour
     Button blueCup;
 
     [SerializeField]
-    GameObject timeline1;
+    PlayableDirector timeline1;
 
     [SerializeField]
-    GameObject timeline2;
+    PlayableDirector timeline2;
 
     [SerializeField]
-    GameObject timeline3;
+    PlayableDirector timeline3;
 
-    public List<GameObject> timelines;
+    public List<PlayableDirector> timelines;
 
+    private float timer;
+
+    int pick;
 
     // Start is called before the first frame update
     void Start()
     {
-        timeline1.SetActive(false);
-        timeline2.SetActive(false);
-        timeline3.SetActive(false);
+        timer = 0.0f;
+
+        // set as uninteractable
+        redCup.interactable = false;
+        greenCup.interactable = false;
+        blueCup.interactable = false;
+
+        timeline1.gameObject.SetActive(false);
+        timeline2.gameObject.SetActive(false);
+        timeline3.gameObject.SetActive(false);
 
         timelines.Add(timeline1);
         timelines.Add(timeline2);
         timelines.Add(timeline3);
 
         PickTimeline();
+
+        // adds 2 seconds to minigame for shuffling
+        Manager.Instance.MiniGameTime += 2.0f;
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        timer += Time.deltaTime;
+        // wait until timeline is done
+        if (timer >= timelines[pick].duration)
+        {
+            // set as interactable
+            redCup.interactable = true;
+            greenCup.interactable = true;
+            blueCup.interactable = true;
+        }
+    }
 
     // pick a random timeline method
     private void PickTimeline()
     {  
-        int pick = Random.Range(0, timelines.Count);
+        pick = Random.Range(0, timelines.Count);
 
-        timelines[pick].SetActive(true);
+        timelines[pick].gameObject.SetActive(true);
     }
 
 
@@ -56,6 +82,7 @@ public class PrincesFiance : MonoBehaviour
     public void PickedPoison()
     {
         Debug.Log("YOU DIED");
+        Manager.Instance.EndMiniGame(false, true);
     }
 
 
@@ -63,6 +90,7 @@ public class PrincesFiance : MonoBehaviour
     public void PickedCorrect()
     {
         Debug.Log("correct!");
+        Manager.Instance.EndMiniGame(true, true);
     }
 
 
