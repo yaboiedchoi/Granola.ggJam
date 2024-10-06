@@ -52,6 +52,7 @@ public class Manager : MonoBehaviour
     [SerializeField] private int currentGameIndex;
     [SerializeField] private int previousGameIndex = -1;
     [SerializeField] private int previousGameIndex2 = -1;
+    [SerializeField] private AudioSource audioSource;
 
     // properties
     public float MiniGameTime {
@@ -132,6 +133,7 @@ public class Manager : MonoBehaviour
                     stingerTime -= Time.deltaTime;
                 }
                 else {
+                    audioSource.PlayOneShot((AudioClip)Resources.Load("Music/Global/Game Over Loop"));
                     // reset timers
                     ResetTimers();
                     // reset max timers
@@ -143,6 +145,8 @@ public class Manager : MonoBehaviour
                 break;
         }
     }
+
+
 
     /// <summary>
     /// End the mini game
@@ -158,12 +162,14 @@ public class Manager : MonoBehaviour
         win = didWin;
         if (win) {
             gameState = GameState.VictoryStinger;
+            
             // decrease max time (not for the stingers)
             if (roundNumber % 5 == 0 && roundNumber != 0) 
                 miniGameTimeMax *= timeDecreaseMultiplier;
 
             // debug
             Debug.Log("Victory Stinger");
+            audioSource.PlayOneShot((AudioClip)Resources.Load("Music/Global/Victory Stinger"));
             // increase the round number
             roundNumber++;
             // add to the score
@@ -175,7 +181,7 @@ public class Manager : MonoBehaviour
             gameState = GameState.DefeatStinger;
 
             Debug.Log("Defeat Stinger");
-
+            
             // add round counter
             roundNumber++;
 
@@ -184,7 +190,12 @@ public class Manager : MonoBehaviour
             // if you run out of lives, game over
             if (lives == 0) {
                 gameState = GameState.GameOver;
-            } 
+                audioSource.PlayOneShot((AudioClip)Resources.Load("Music/Global/Game Over Stinger"));
+            }
+            else
+            {
+                audioSource.PlayOneShot((AudioClip)Resources.Load("Music/Global/Life Lost"));
+            }
         }
 
         // destroy the current mini game
