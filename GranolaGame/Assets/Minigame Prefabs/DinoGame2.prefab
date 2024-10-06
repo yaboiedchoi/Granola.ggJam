@@ -185,6 +185,18 @@ PrefabInstance:
       propertyPath: m_MaskInteraction
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 541503201891966091, guid: 38fa316dde3c64018819c5a16d18c9ad, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.96043813
+      objectReference: {fileID: 0}
+    - target: {fileID: 541503201891966091, guid: 38fa316dde3c64018819c5a16d18c9ad, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7962985
+      objectReference: {fileID: 0}
+    - target: {fileID: 541503201891966091, guid: 38fa316dde3c64018819c5a16d18c9ad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.06
+      objectReference: {fileID: 0}
     - target: {fileID: 1237930292506691924, guid: 38fa316dde3c64018819c5a16d18c9ad, type: 3}
       propertyPath: m_MaskInteraction
       value: 1

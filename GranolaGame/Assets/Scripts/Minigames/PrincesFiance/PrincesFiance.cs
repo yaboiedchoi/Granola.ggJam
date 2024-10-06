@@ -67,6 +67,11 @@ public class PrincesFiance : MonoBehaviour
             greenCup.interactable = true;
             blueCup.interactable = true;
         }
+        // lose state (time runs out)
+        if (Manager.Instance.MiniGameTime <= 0)
+        {
+            Manager.Instance.EndMiniGame(false, true);
+        }
     }
 
     // pick a random timeline method

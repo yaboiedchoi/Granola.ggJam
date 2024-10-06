@@ -29,14 +29,14 @@ public class Manager : MonoBehaviour
             _instance = this;
         }
     }
-    
+
     // fields
     [SerializeField] private int score = 0;
     [SerializeField] private int lives = 3;
-    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text levelText;
     [SerializeField] private GameObject heart;
-    private List<GameObject> hearts = new List<GameObject>();
-    
+    private Stack<GameObject> hearts = new Stack<GameObject>();
+
     [SerializeField] private float timeDecreaseMultiplier = 0.9f;
     // [SerializeField] private float playbackSpeed;
     [SerializeField] private GameState gameState;
@@ -59,6 +59,10 @@ public class Manager : MonoBehaviour
     [SerializeField] private int previousGameIndex2 = -1;
     [SerializeField] private AudioSource oneshotPlayer;
     [SerializeField] private AudioSource loopPlayer;
+
+    // stinger items
+    [SerializeField] private TMP_Text stingerScoreText;
+    [SerializeField] private GameObject tvStatic;
 
     // properties
     public float MiniGameTime {
@@ -85,13 +89,21 @@ public class Manager : MonoBehaviour
         // displaying the hearts
         for (int i = 0; i < lives; i++)
         {
-            hearts.Add(Instantiate(heart, new Vector3(-5.38f, -4.39f + (.6f * i), 0), Quaternion.identity));
+            hearts.Push(Instantiate(heart, new Vector3(-5.38f, -4.39f + (.6f * i), 0), Quaternion.identity));
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        // if active, turn off the stinger score text
+        if (stingerScoreText.gameObject.activeSelf)
+        {
+            stingerScoreText.gameObject.SetActive(false);
+            tvStatic.SetActive(false);
+        }
+
+        // switch statement for game state
         switch (gameState) {
             case GameState.MiniGame:
                 // if the mini game time is greater than -2, decrease the time
@@ -116,6 +128,14 @@ public class Manager : MonoBehaviour
                 // }
                 break;
             case GameState.VictoryStinger:
+                // Show the stinger score text
+                if (!stingerScoreText.gameObject.activeSelf)
+                {
+                    stingerScoreText.gameObject.SetActive(true);
+                    tvStatic.SetActive(true);
+                }
+
+                SetStingerScore();
                 // count down stinger time
                 if (stingerTime >= 0) {
                     stingerTime -= Time.deltaTime;
@@ -141,6 +161,14 @@ public class Manager : MonoBehaviour
                 }
                 break;
             case GameState.DefeatStinger:
+                // Show the stinger score text
+                if (!stingerScoreText.gameObject.activeSelf)
+                {
+                    stingerScoreText.gameObject.SetActive(true);
+                    tvStatic.SetActive(true);
+                }
+
+                SetStingerScore();
                 if (stingerTime >= 0) {
                     stingerTime -= Time.deltaTime;
 
@@ -225,8 +253,8 @@ public class Manager : MonoBehaviour
             // increase the round number
             roundNumber++;
             // add to the score
-            score += 1;
-            scoreText.text = score.ToString();
+            score += 100;
+            levelText.text = roundNumber.ToString();
             // reset win state
             win = false;
         }
@@ -240,10 +268,12 @@ public class Manager : MonoBehaviour
             roundNumber++;
 
             // remove a life
-            lives--;
+            // lives--;
+            DecreaseLives();
 
+            //TODO: rewrite this so no error
             //delete a heart
-            Destroy(hearts[lives]);
+            //Destroy(hearts[lives]);
             // if you run out of lives, game over
             if (lives == 0) {
                 gameState = GameState.GameOver;
@@ -300,5 +330,16 @@ public class Manager : MonoBehaviour
         else {
             throw new System.Exception("Current game already exists!");
         }
+    }
+
+    public void DecreaseLives()
+    {
+        lives--;
+        Destroy(hearts.Pop());
+    }
+
+    public void SetStingerScore()
+    {
+        stingerScoreText.text = "Score: " + score;
     }
 }

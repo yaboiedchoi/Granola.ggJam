@@ -4,7 +4,28 @@ using UnityEngine;
 
 public class SpaceFightManager : MonoBehaviour
 {
-    [SerializeField] List<GameObject> bulletList;
+
+    // singleton
+    private static SpaceFightManager _instance;
+    public static SpaceFightManager Instance { get { return _instance; } }
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+    [SerializeField] private List<GameObject> bulletList;
+
+    public List<GameObject> BulletList
+    {
+        get { return bulletList; }
+        set { bulletList = value; }
+    }
     // Start is called before the first frame update
     void Start()
     {

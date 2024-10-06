@@ -34,6 +34,7 @@ public class Laser : MonoBehaviour
         transform.position += laserSpeed * Time.deltaTime;
         if (transform.position.y < -8)
         {
+            SpaceFightManager.Instance.BulletList.Remove(gameObject);
             Destroy(gameObject);
         }
         if (laser.bounds.Intersects(saber.bounds))
