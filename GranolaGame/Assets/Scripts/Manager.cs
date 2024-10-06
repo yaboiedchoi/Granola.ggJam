@@ -203,7 +203,7 @@ public class Manager : MonoBehaviour
             roundNumber++;
             // add to the score
             score += 1;
-            // scoreText.text = score.ToString();
+            scoreText.text = score.ToString();
             // reset win state
             win = false;
         }
