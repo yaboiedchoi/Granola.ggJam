@@ -32,6 +32,7 @@ public class FigureFable : MonoBehaviour
         redlight = false;
         Background.sprite = noArnold;
         interval = 1f;
+        Manager.Instance.PlayLoop("Figure Fable/Figure Fable Loop");
     }
 
     // Update is called once per frame
