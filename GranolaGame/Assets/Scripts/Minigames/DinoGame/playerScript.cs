@@ -5,7 +5,7 @@ using UnityEngine;
 public class playerScript : MonoBehaviour
 {
     //bool for if the player is grounded
-    private int jumpCount = 2;
+    private bool grounded = true;
 
     //force applied when the player jumps
     [SerializeField]
@@ -22,10 +22,16 @@ public class playerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !(jumpCount == 0))
+        if (Input.GetKeyDown(KeyCode.Space) && grounded)
         {
             rigidBody.AddForce(Vector2.up * jumpAmount);
-            jumpCount--;
+            grounded = false;
+        }
+
+        //win state
+        if (Manager.Instance.MiniGameTime < 0)
+        {
+            Manager.Instance.EndMiniGame(true, true);
         }
     }
 
@@ -34,7 +40,7 @@ public class playerScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            jumpCount = 2;
+            grounded = true;
         }
     }
 
@@ -42,7 +48,8 @@ public class playerScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Velociraptor"))
         {
-            Debug.Log("EndGame");
+            Manager.Instance.EndMiniGame(false, false);
+            // Play stinger here
         }
     }
 }
