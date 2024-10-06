@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum GameState {
@@ -31,6 +33,9 @@ public class Manager : MonoBehaviour
     // fields
     [SerializeField] private int score = 0;
     [SerializeField] private int lives = 3;
+    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private GameObject heart;
+    private List<GameObject> hearts = new List<GameObject>();
     
     [SerializeField] private float timeDecreaseMultiplier = 0.9f;
     // [SerializeField] private float playbackSpeed;
@@ -77,6 +82,13 @@ public class Manager : MonoBehaviour
         currentGame = Instantiate(listOfGames[currentGameIndex], Vector3.zero, Quaternion.identity);
         oneshotPlayer.volume = PlayerPrefs.GetFloat("SFX Volume");
         loopPlayer.volume = PlayerPrefs.GetFloat("Music Volume");
+        currentGame = Instantiate(listOfGames[currentGameIndex], Vector3.zero, Quaternion.identity); 
+
+        // displaying the hearts
+        for (int i = 0; i < lives; i++)
+        {
+            hearts.Add(Instantiate(heart, new Vector3(-5.38f, -4.39f + (.6f * i), 0), Quaternion.identity));
+        }
     }
 
     // Update is called once per frame
@@ -193,7 +205,8 @@ public class Manager : MonoBehaviour
             // increase the round number
             roundNumber++;
             // add to the score
-            score += 100;
+            score += 1;
+            scoreText.text = score.ToString();
             // reset win state
             win = false;
         }
@@ -208,6 +221,9 @@ public class Manager : MonoBehaviour
 
             // remove a life
             lives--;
+
+            //delete a heart
+            Destroy(hearts[lives]);
             // if you run out of lives, game over
             if (lives == 0) {
                 gameState = GameState.GameOver;
