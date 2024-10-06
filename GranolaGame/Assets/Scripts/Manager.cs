@@ -153,6 +153,7 @@ public class Manager : MonoBehaviour
     public void PlayLoop(string path)
     {
         loopPlayer.Stop();
+        loopPlayer.pitch = Mathf.Clamp(10 / miniGameTimeMax, 1, 3);
         loopPlayer.PlayOneShot((AudioClip)Resources.Load("Music/" + path));
     }
     public void StopLoop()
