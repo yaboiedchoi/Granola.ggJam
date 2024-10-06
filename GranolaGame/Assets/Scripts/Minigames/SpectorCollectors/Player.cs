@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 
         Flip();  // flips player
 
-        rb.velocity = new Vector2(speed * move, rb.velocity.y);  // get velocity vector
+        rb.velocity = new Vector2(speed * move + (speed * move *(10f - Manager.Instance.MiniGameTimeMax) / 10f), rb.velocity.y);  // get velocity vector
 
         //// if J is pressed vacuum shows
         //if (Input.GetKeyDown(KeyCode.Space))
