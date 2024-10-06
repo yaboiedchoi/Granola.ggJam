@@ -45,7 +45,6 @@ public class Shout : MonoBehaviour
         noiseSpeed = moveSpeed / 3f;
         Debug.Log("Noise Speed: " + noiseSpeed);
         Debug.Log("Move Speed: " + moveSpeed);
-
     }
 
     // Update is called once per frame
@@ -66,10 +65,6 @@ public class Shout : MonoBehaviour
         //lose state
         if (noiseLevel.y > .4f)
         {
-            Manager.Instance.StopLoop();
-            Manager.Instance.StopSounds();
-            Manager.Instance.PlaySound("Shout/Knife");
-            Manager.Instance.PlaySound("Shout/Shout Scream");
             if (!failed)
                 Manager.Instance.MiniGameTime = 1.0f;
 
@@ -77,7 +72,10 @@ public class Shout : MonoBehaviour
             doors.sprite = open;
             noiseLevel.y = .4f;
             slasherPos.x = -.1f;
-            
+            Manager.Instance.StopLoop();
+            Manager.Instance.StopSounds();
+            Manager.Instance.PlaySound("Shout/Knife");
+            Manager.Instance.PlaySound("Shout/Shout Scream");
         }
 
         if (noiseLevel.y < 0)
