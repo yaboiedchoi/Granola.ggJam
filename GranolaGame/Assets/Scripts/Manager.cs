@@ -98,6 +98,13 @@ public class Manager : MonoBehaviour
                 if (miniGameTime >= 0) {
                     miniGameTime -= Time.deltaTime;
                 }
+
+                //hearts and score count reappear during games
+                for (int i = 0; i < hearts.Count; i++)
+                {
+                    hearts[i].GetComponent<Renderer>().enabled = true;
+                }
+
                 // // if you win
                 // if (win) {
                 //     gameState = GameState.VictoryStinger;
@@ -111,6 +118,12 @@ public class Manager : MonoBehaviour
                 // count down stinger time
                 if (stingerTime >= 0) {
                     stingerTime -= Time.deltaTime;
+
+                    //hearts and score disappear during stinger
+                    for (int i = 0; i < hearts.Count; i++)
+                    {
+                        hearts[i].GetComponent<Renderer>().enabled = false;
+                    }
                 }
                 else {
                     gameState = GameState.MiniGame;
@@ -128,6 +141,13 @@ public class Manager : MonoBehaviour
             case GameState.DefeatStinger:
                 if (stingerTime >= 0) {
                     stingerTime -= Time.deltaTime;
+
+                    //hearts and score disappear during stinger
+                    for (int i = 0; i <= hearts.Count; i++)
+                    {
+                        hearts[i].GetComponent<Renderer>().enabled = false;
+                    }
+                    scoreText.gameObject.SetActive(false);
                 }
                 else {
                     gameState = GameState.MiniGame;
