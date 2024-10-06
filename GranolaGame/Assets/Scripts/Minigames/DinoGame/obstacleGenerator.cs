@@ -32,7 +32,7 @@ public class ObstacleGenerator : MonoBehaviour
         }
         else
         {
-            obstacleInstance = Instantiate(flyObstacle, transform.position + new Vector3(0.0f, 2.3f, 0.0f), transform.rotation, this.transform);
+            obstacleInstance = Instantiate(flyObstacle, transform.position, transform.rotation, this.transform);
             obstacleInstance.GetComponent<obstacle>().obstacleGenerator = this;
         }
     }
