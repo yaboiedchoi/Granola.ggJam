@@ -172,7 +172,7 @@ MonoBehaviour:
   score: 0
   lives: 3
   scoreText: {fileID: 1712153859}
-  heart: {fileID: 0}
+  heart: {fileID: 8825859332312154473, guid: 4f659f9b2d82a4043a5140ac6444dc29, type: 3}
   timeDecreaseMultiplier: 0.9
   gameState: 0
   listOfGames:

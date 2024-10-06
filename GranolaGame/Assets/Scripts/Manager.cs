@@ -85,7 +85,7 @@ public class Manager : MonoBehaviour
         // displaying the hearts
         for (int i = 0; i < lives; i++)
         {
-            //hearts.Add(Instantiate(heart, new Vector3(-5.38f, -4.39f + (.6f * i), 0), Quaternion.identity));
+            hearts.Add(Instantiate(heart, new Vector3(-5.38f, -4.39f + (.6f * i), 0), Quaternion.identity));
         }
     }
 
@@ -220,7 +220,7 @@ public class Manager : MonoBehaviour
             lives--;
 
             //delete a heart
-            // Destroy(hearts[lives]);
+            Destroy(hearts[lives]);
             // if you run out of lives, game over
             if (lives == 0) {
                 gameState = GameState.GameOver;
