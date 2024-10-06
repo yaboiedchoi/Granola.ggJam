@@ -21,7 +21,8 @@ public class Intro : MonoBehaviour
     {
         creditsCanvas.enabled = false;
         optionsCanvas.enabled = false;
-        
+        sfxVol.value = PlayerPrefs.GetFloat("SFX Volume");
+        musicVol.value = PlayerPrefs.GetFloat("Music Volume");
     }
 
     // Update is called once per frame
