@@ -33,7 +33,7 @@ public class Manager : MonoBehaviour
     [SerializeField] private int lives = 3;
     
     [SerializeField] private float timeDecreaseMultiplier = 0.9f;
-    [SerializeField] private float playbackSpeed;
+    // [SerializeField] private float playbackSpeed;
     [SerializeField] private GameState gameState;
     [SerializeField] private List<GameObject> listOfGames;
     [SerializeField] private GameObject currentGame;
@@ -49,6 +49,9 @@ public class Manager : MonoBehaviour
     // game state info
     [SerializeField] private bool win;
     [SerializeField] private int roundNumber = 0;
+    [SerializeField] private int currentGameIndex;
+    [SerializeField] private int previousGameIndex = -1;
+    [SerializeField] private int previousGameIndex2 = -1;
 
     // properties
     public float MiniGameTime {
@@ -68,7 +71,8 @@ public class Manager : MonoBehaviour
         miniGameTime = miniGameTimeMax;
         stingerTime = stingerTimeMax;
         win = false;
-        currentGame = Instantiate(listOfGames[0], Vector3.zero, Quaternion.identity);
+        currentGameIndex = Random.Range(0, listOfGames.Count);
+        currentGame = Instantiate(listOfGames[currentGameIndex], Vector3.zero, Quaternion.identity); 
     }
 
     // Update is called once per frame
@@ -102,6 +106,9 @@ public class Manager : MonoBehaviour
                     
                     // reset timers
                     ResetTimers();
+
+                    // get a new game
+                    currentGame = GetRandomGame();
                 }
                 break;
             case GameState.DefeatStinger:
@@ -114,6 +121,9 @@ public class Manager : MonoBehaviour
                     Debug.Log("Mini Game Start");
                     // reset timers
                     ResetTimers();
+
+                    // get a new game
+                    currentGame = GetRandomGame();
                 }
                 break;
             case GameState.GameOver:
@@ -149,7 +159,9 @@ public class Manager : MonoBehaviour
         if (win) {
             gameState = GameState.VictoryStinger;
             // decrease max time (not for the stingers)
-            miniGameTimeMax *= timeDecreaseMultiplier;
+            if (roundNumber % 5 == 0 && roundNumber != 0) 
+                miniGameTimeMax *= timeDecreaseMultiplier;
+
             // debug
             Debug.Log("Victory Stinger");
             // increase the round number
@@ -177,6 +189,7 @@ public class Manager : MonoBehaviour
 
         // destroy the current mini game
         Destroy(currentGame);
+        currentGame = null;
         // reset timers
         ResetTimers();
     }
@@ -194,5 +207,25 @@ public class Manager : MonoBehaviour
         roundNumber = 0;
         score = 0;
         lives = 3;
+    }
+
+    /// <summary>
+    /// Get a random game from the list of games. If current game exists, then do nothing
+    /// </summary>
+    public GameObject GetRandomGame() {
+        if (currentGame == null) {
+            do {
+                currentGameIndex = Random.Range(0, listOfGames.Count);
+            }
+            while (currentGameIndex == previousGameIndex || currentGameIndex == previousGameIndex2);
+
+            previousGameIndex2 = previousGameIndex;
+            previousGameIndex = currentGameIndex;
+
+            return Instantiate(listOfGames[currentGameIndex], Vector3.zero, Quaternion.identity);
+        } 
+        else {
+            throw new System.Exception("Current game already exists!");
+        }
     }
 }

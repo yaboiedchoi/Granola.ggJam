@@ -32,11 +32,11 @@ public class Shout : MonoBehaviour
 
         if (Manager.Instance.MiniGameTimeMax == 10)
         {
-            moveSpeed = 0.5f;
+            moveSpeed = 0.4f;
         }
         else
         {
-            moveSpeed = 0.5f * (10 - Manager.Instance.MiniGameTime);
+            moveSpeed = 0.4f + (0.05f * (10.0f - Manager.Instance.MiniGameTimeMax));
         }
         
         slasher.transform.position = slasherPos;
@@ -65,7 +65,7 @@ public class Shout : MonoBehaviour
         {
             if (!failed)
                 Manager.Instance.MiniGameTime = 1.0f;
-                
+
             failed = true;
             doors.sprite = open;
             noiseLevel.y = .4f;

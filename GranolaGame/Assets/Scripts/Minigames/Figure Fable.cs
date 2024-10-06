@@ -9,10 +9,11 @@ public class FigureFable : MonoBehaviour
     [SerializeField] TMP_Text stopStartText;
     [SerializeField] TMP_Text keyPressText;
     [SerializeField] SpriteRenderer Background;
+    [SerializeField] SpriteRenderer toyRender;
     [SerializeField] GameObject toy;
     float interval;
     [SerializeField] bool redlight;
-    [SerializeField] float timer;
+    [SerializeField] float timer = 0;
 
     // sprites
     [SerializeField] Sprite standng;
@@ -38,12 +39,11 @@ public class FigureFable : MonoBehaviour
     {
         // Decreases interval every frame
         interval -= Time.deltaTime;
-
         // When the interval is less than 0 change the red light and reset interval to a random float
         if (interval < 0)
         {
             redlight = !redlight;
-            interval = Random.Range(1.5f, 2.0f);
+            interval = Random.Range(0.15f * Manager.Instance.MiniGameTimeMax, 0.2f * Manager.Instance.MiniGameTimeMax);
             
             // Changes the logic of the redlight
             RedLightGreenLight();
@@ -66,17 +66,8 @@ public class FigureFable : MonoBehaviour
             // Change text to play dead and sprite to looking at screen
             Background.sprite = yesArnold;
            
-            // Increase the timer
-            timer += Time.deltaTime;
 
-            // When the timer goes above the value below and the player has not laid down, they fail
-            if (timer > 1.0f && toy.transform.localRotation.z == 0)
-            {
-                Debug.Log("FAIL");
-                stopStartText.text = " ";
-                key = 6;
-                return;
-            }
+            
 
             switch (key)
             {
@@ -105,12 +96,41 @@ public class FigureFable : MonoBehaviour
                     break;
             }
 
+            // When the timer goes above the value below and the player has not laid down, they fail
+            if (timer >= 1.0f && toyRender.sprite == standng)
+            {
+                Debug.Log("FAIL: Not pressed in time");
+                stopStartText.text = " ";
+                key = 6;
+                Manager.Instance.EndMiniGame(false, true);
+                return;
+            }
+
+
+            // Increase the timer
+            timer += Time.deltaTime;
+
+            // if correct key is pressed
             if (Input.GetKeyDown(keyCode))
             {
                 toy.GetComponent <SpriteRenderer>().sprite = playDead;
                 stopStartText.text = " ";
                 key = 6;
             }
+            // if any other key is pressed thats not the correct one
+            if (!Input.GetKeyDown(keyCode) && Input.anyKeyDown)
+            {
+                Debug.Log("FAIL: Wrong key pressed");
+                stopStartText.text = " ";
+                key = 6;
+                Manager.Instance.EndMiniGame(false, true);
+                return;
+            }
+        }
+
+        if (Manager.Instance.MiniGameTime <= 0)
+        {
+            Manager.Instance.EndMiniGame(true, true);
         }
     }
 

@@ -863,7 +863,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7a0d2246ca57f30478465bf680b452cb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aa8bc5c90dc60cd4dbf8a3cafe72d4dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -886,7 +886,7 @@ GameObject:
   - component: {fileID: 3796014050595507038}
   - component: {fileID: 1084885643929491828}
   m_Layer: 0
-  m_Name: Game
+  m_Name: Shout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -902,8 +902,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1.87}
-  m_LocalScale: {x: 9.9803, y: 9.9803, z: 9.9803}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 9.7, y: 9.7, z: 9.7}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7414643169969131438}
   - {fileID: 694038856246177908}
