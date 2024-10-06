@@ -985,6 +985,7 @@ MonoBehaviour:
   highscoreCanvas: {fileID: 1426367308}
   sfxSlider: {fileID: 1227249768}
   musicSlider: {fileID: 1671058309}
+  highscoreText: {fileID: 1022595477}
 --- !u!4 &361842153
 Transform:
   m_ObjectHideFlags: 0

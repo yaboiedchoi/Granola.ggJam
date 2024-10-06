@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using TMPro;
 public class Intro : MonoBehaviour
 {
     [SerializeField] Canvas menuCanvas;
@@ -13,6 +13,7 @@ public class Intro : MonoBehaviour
     [SerializeField] Canvas highscoreCanvas;
     [SerializeField] Slider sfxSlider;
     [SerializeField] Slider musicSlider;
+    [SerializeField] TMP_Text highscoreText;
 
     // Start is called before the first frame update
     void Start()
@@ -20,19 +21,24 @@ public class Intro : MonoBehaviour
         creditsCanvas.enabled = false;
         optionsCanvas.enabled = false;
         highscoreCanvas.enabled = false;
-        if(!PlayerPrefs.HasKey("SFX Volume"))
+        if (!PlayerPrefs.HasKey("SFX Volume"))
         {
             PlayerPrefs.SetFloat("SFX Volume", 1f);
             PlayerPrefs.SetFloat("Music Volume", 1f);
         }
         sfxSlider.value = PlayerPrefs.GetFloat("SFX Volume");
         musicSlider.value = PlayerPrefs.GetFloat("Music Volume");
+        if (!PlayerPrefs.HasKey("Highscore"))
+        {
+            PlayerPrefs.SetInt("Highscore", 0);
+        }
+        highscoreText.text = PlayerPrefs.GetInt("Highscore").ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void StartGame()
@@ -60,7 +66,7 @@ public class Intro : MonoBehaviour
         menuCanvas.enabled = false;
     }
 
-    public void CloseOptions() 
+    public void CloseOptions()
     {
         optionsCanvas.enabled = false;
         menuCanvas.enabled = true;
