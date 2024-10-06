@@ -52,7 +52,8 @@ public class Manager : MonoBehaviour
     [SerializeField] private int currentGameIndex;
     [SerializeField] private int previousGameIndex = -1;
     [SerializeField] private int previousGameIndex2 = -1;
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource oneshotPlayer;
+    [SerializeField] private AudioSource loopPlayer;
 
     // properties
     public float MiniGameTime {
@@ -133,7 +134,7 @@ public class Manager : MonoBehaviour
                     stingerTime -= Time.deltaTime;
                 }
                 else {
-                    audioSource.PlayOneShot((AudioClip)Resources.Load("Music/Global/Game Over Loop"));
+                    oneshotPlayer.PlayOneShot((AudioClip)Resources.Load("Music/Global/Game Over Loop"));
                     // reset timers
                     ResetTimers();
                     // reset max timers
@@ -145,8 +146,23 @@ public class Manager : MonoBehaviour
         }
     }
 
-
-
+    public void PlaySound(string path)
+    {
+        oneshotPlayer.PlayOneShot((AudioClip)Resources.Load("Music/" + path));
+    }
+    public void PlayLoop(string path)
+    {
+        loopPlayer.Stop();
+        loopPlayer.PlayOneShot((AudioClip)Resources.Load("Music/" + path));
+    }
+    public void StopLoop()
+    {
+        loopPlayer.Stop();
+    }
+    public void StopSounds()
+    {
+        oneshotPlayer.Stop();
+    }
     /// <summary>
     /// End the mini game
     /// </summary>
@@ -167,8 +183,10 @@ public class Manager : MonoBehaviour
                 miniGameTimeMax *= timeDecreaseMultiplier;
 
             // debug
+            StopSounds();
+            StopLoop();
             Debug.Log("Victory Stinger");
-            audioSource.PlayOneShot((AudioClip)Resources.Load("Music/Global/Victory Stinger"));
+            oneshotPlayer.PlayOneShot((AudioClip)Resources.Load("Music/Global/Victory Stinger"));
             // increase the round number
             roundNumber++;
             // add to the score
@@ -181,6 +199,7 @@ public class Manager : MonoBehaviour
 
             Debug.Log("Defeat Stinger");
             
+
             // add round counter
             roundNumber++;
 
@@ -189,11 +208,11 @@ public class Manager : MonoBehaviour
             // if you run out of lives, game over
             if (lives == 0) {
                 gameState = GameState.GameOver;
-                audioSource.PlayOneShot((AudioClip)Resources.Load("Music/Global/Game Over Stinger"));
+                oneshotPlayer.PlayOneShot((AudioClip)Resources.Load("Music/Global/Game Over Stinger"));
             }
             else
             {
-                audioSource.PlayOneShot((AudioClip)Resources.Load("Music/Global/Life Lost"));
+                oneshotPlayer.PlayOneShot((AudioClip)Resources.Load("Music/Global/Life Lost"));
             }
         }
 
