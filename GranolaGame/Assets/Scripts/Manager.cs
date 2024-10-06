@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum GameState {
     MiniGame,
@@ -59,6 +61,7 @@ public class Manager : MonoBehaviour
     [SerializeField] private int previousGameIndex2 = -1;
     [SerializeField] private AudioSource oneshotPlayer;
     [SerializeField] private AudioSource loopPlayer;
+    [SerializeField] private Button returnToMenuButton;
 
     // properties
     public float MiniGameTime {
@@ -230,6 +233,7 @@ public class Manager : MonoBehaviour
                 {
                     PlayerPrefs.SetInt("Highscore", score);
                 }
+                returnToMenuButton.gameObject.SetActive(true);
             }
             else
             {
@@ -242,6 +246,11 @@ public class Manager : MonoBehaviour
         currentGame = null;
         // reset timers
         ResetTimers();
+    }
+
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene("Intro Scene");
     }
     public void ResetTimers() {
         miniGameTime = miniGameTimeMax;
