@@ -10,9 +10,6 @@ public class BackFromThePast : MonoBehaviour
     [SerializeField] TMP_Text text;
     [SerializeField] GameObject obstacle;
     [SerializeField] float speed;
-    [SerializeField] Collider2D carCollider;
-    [SerializeField] Collider2D obstacleCollider;
-
     GameObject[,] obstacles;
     string position;
     int rand;
@@ -52,19 +49,9 @@ public class BackFromThePast : MonoBehaviour
                 }
             }
         }
-        
-        CheckCollision();
+
     }
-   
-    void CheckCollision()
-    {
-        //if ()
-        //{
-        //    Time.timeScale = 0;
-        //    Debug.Log("DEAD");
-        //}
-    }
-    
+
     void InstantiateObjects()
     {
         for (int i = 0; i < 2; i++)
