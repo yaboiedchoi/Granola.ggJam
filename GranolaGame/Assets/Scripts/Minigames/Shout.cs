@@ -38,7 +38,9 @@ public class Shout : MonoBehaviour
         {
             moveSpeed = 0.4f + (0.05f * (10.0f - Manager.Instance.MiniGameTimeMax));
         }
-        
+        Manager.Instance.PlaySound("Shout/Shout Footsteps");
+        Manager.Instance.PlaySound("Shout/Breath");
+        Manager.Instance.PlayLoop("Shout/Shout Loop");
         slasher.transform.position = slasherPos;
         noiseSpeed = moveSpeed / 3f;
         Debug.Log("Noise Speed: " + noiseSpeed);
@@ -70,6 +72,10 @@ public class Shout : MonoBehaviour
             doors.sprite = open;
             noiseLevel.y = .4f;
             slasherPos.x = -.1f;
+            Manager.Instance.StopLoop();
+            Manager.Instance.StopSounds();
+            Manager.Instance.PlaySound("Shout/Knife");
+            Manager.Instance.PlaySound("Shout/Shout Scream");
         }
 
         if (noiseLevel.y < 0)
