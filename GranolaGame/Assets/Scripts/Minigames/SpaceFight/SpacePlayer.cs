@@ -9,7 +9,7 @@ public class SpacePlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerSpeed = new Vector3(5f, 0f);
+        playerSpeed = new Vector3(10f, 0f);
     }
 
     // Update is called once per frame
