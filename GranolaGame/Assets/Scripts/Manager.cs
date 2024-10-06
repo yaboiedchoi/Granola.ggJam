@@ -325,9 +325,8 @@ public class Manager : MonoBehaviour
             do {
                 currentGameIndex = Random.Range(0, listOfGames.Count);
             }
-            while (currentGameIndex == previousGameIndex && currentGameIndex == previousGameIndex2);
+            while (currentGameIndex == previousGameIndex);
 
-            previousGameIndex2 = previousGameIndex;
             previousGameIndex = currentGameIndex;
 
             return Instantiate(listOfGames[currentGameIndex]);
