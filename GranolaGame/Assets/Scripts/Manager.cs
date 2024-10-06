@@ -79,8 +79,9 @@ public class Manager : MonoBehaviour
         stingerTime = stingerTimeMax;
         win = false;
         currentGameIndex = Random.Range(0, listOfGames.Count);
-        currentGame = Instantiate(listOfGames[currentGameIndex], Vector3.zero, Quaternion.identity); 
-
+        currentGame = Instantiate(listOfGames[currentGameIndex], Vector3.zero, Quaternion.identity);
+        oneshotPlayer.volume = PlayerPrefs.GetFloat("SFX Volume");
+        loopPlayer.volume = PlayerPrefs.GetFloat("Music Volume");
         // displaying the hearts
         for (int i = 0; i < lives; i++)
         {
