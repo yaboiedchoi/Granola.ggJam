@@ -84,7 +84,7 @@ public class Manager : MonoBehaviour
         // displaying the hearts
         for (int i = 0; i < lives; i++)
         {
-            hearts.Add(Instantiate(heart, new Vector3(-5.38f, -4.39f + (.6f * i), 0), Quaternion.identity));
+            //hearts.Add(Instantiate(heart, new Vector3(-5.38f, -4.39f + (.6f * i), 0), Quaternion.identity));
         }
     }
 
@@ -202,7 +202,7 @@ public class Manager : MonoBehaviour
             roundNumber++;
             // add to the score
             score += 1;
-            scoreText.text = score.ToString();
+            // scoreText.text = score.ToString();
             // reset win state
             win = false;
         }
