@@ -85,7 +85,7 @@ public class Manager : MonoBehaviour
         // displaying the hearts
         for (int i = 0; i < lives; i++)
         {
-            //hearts.Add(Instantiate(heart, new Vector3(-5.38f, -4.39f + (.6f * i), 0), Quaternion.identity));
+            hearts.Add(Instantiate(heart, new Vector3(-5.38f, -4.39f + (.6f * i), 0), Quaternion.identity));
         }
     }
 
@@ -98,6 +98,13 @@ public class Manager : MonoBehaviour
                 if (miniGameTime >= 0) {
                     miniGameTime -= Time.deltaTime;
                 }
+
+                //hearts and score count reappear during games
+                for (int i = 0; i < hearts.Count; i++)
+                {
+                    hearts[i].GetComponent<Renderer>().enabled = true;
+                }
+
                 // // if you win
                 // if (win) {
                 //     gameState = GameState.VictoryStinger;
@@ -111,6 +118,12 @@ public class Manager : MonoBehaviour
                 // count down stinger time
                 if (stingerTime >= 0) {
                     stingerTime -= Time.deltaTime;
+
+                    //hearts and score disappear during stinger
+                    for (int i = 0; i < hearts.Count; i++)
+                    {
+                        hearts[i].GetComponent<Renderer>().enabled = false;
+                    }
                 }
                 else {
                     gameState = GameState.MiniGame;
@@ -128,6 +141,13 @@ public class Manager : MonoBehaviour
             case GameState.DefeatStinger:
                 if (stingerTime >= 0) {
                     stingerTime -= Time.deltaTime;
+
+                    //hearts and score disappear during stinger
+                    for (int i = 0; i <= hearts.Count; i++)
+                    {
+                        hearts[i].GetComponent<Renderer>().enabled = false;
+                    }
+                    scoreText.gameObject.SetActive(false);
                 }
                 else {
                     gameState = GameState.MiniGame;
@@ -203,7 +223,7 @@ public class Manager : MonoBehaviour
             roundNumber++;
             // add to the score
             score += 1;
-            // scoreText.text = score.ToString();
+            scoreText.text = score.ToString();
             // reset win state
             win = false;
         }
@@ -220,7 +240,7 @@ public class Manager : MonoBehaviour
             lives--;
 
             //delete a heart
-            // Destroy(hearts[lives]);
+            Destroy(hearts[lives]);
             // if you run out of lives, game over
             if (lives == 0) {
                 gameState = GameState.GameOver;
