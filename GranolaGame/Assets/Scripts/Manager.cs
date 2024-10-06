@@ -99,11 +99,12 @@ public class Manager : MonoBehaviour
                     miniGameTime -= Time.deltaTime;
                 }
 
-                //hearts and score count reappear during games
-                for (int i = 0; i < hearts.Count; i++)
-                {
-                    hearts[i].GetComponent<Renderer>().enabled = true;
-                }
+                // TODO: rewrite this so no error
+                ////hearts and score count reappear during games
+                //for (int i = 0; i < hearts.Count; i++)
+                //{
+                //    hearts[i].GetComponent<Renderer>().enabled = true;
+                //}
 
                 // // if you win
                 // if (win) {
@@ -119,11 +120,12 @@ public class Manager : MonoBehaviour
                 if (stingerTime >= 0) {
                     stingerTime -= Time.deltaTime;
 
-                    //hearts and score disappear during stinger
-                    for (int i = 0; i < hearts.Count; i++)
-                    {
-                        hearts[i].GetComponent<Renderer>().enabled = false;
-                    }
+                    // TODO: rewrite this so no error
+                    ////hearts and score disappear during stinger
+                    //for (int i = 0; i < hearts.Count; i++)
+                    //{
+                    //    hearts[i].GetComponent<Renderer>().enabled = false;
+                    //}
                 }
                 else {
                     gameState = GameState.MiniGame;
@@ -142,12 +144,13 @@ public class Manager : MonoBehaviour
                 if (stingerTime >= 0) {
                     stingerTime -= Time.deltaTime;
 
+                    // TODO: rewrite this so no error
                     //hearts and score disappear during stinger
-                    for (int i = 0; i <= hearts.Count; i++)
-                    {
-                        hearts[i].GetComponent<Renderer>().enabled = false;
-                    }
-                    scoreText.gameObject.SetActive(false);
+                    //for (int i = 0; i <= hearts.Count; i++)
+                    //{
+                    //    hearts[i].GetComponent<Renderer>().enabled = false;
+                    //}
+                    //scoreText.gameObject.SetActive(false);
                 }
                 else {
                     gameState = GameState.MiniGame;
