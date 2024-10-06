@@ -736,6 +736,36 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
+  - m_Index: 56
+    m_Metrics:
+      m_Width: 76.53125
+      m_Height: 107.6875
+      m_HorizontalBearingX: 7.40625
+      m_HorizontalBearingY: 115.203125
+      m_HorizontalAdvance: 88.15625
+    m_GlyphRect:
+      m_X: 439
+      m_Y: 661
+      m_Width: 77
+      m_Height: 109
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+  - m_Index: 43
+    m_Metrics:
+      m_Width: 76.53125
+      m_Height: 107.6875
+      m_HorizontalBearingX: 7.40625
+      m_HorizontalBearingY: 115.203125
+      m_HorizontalAdvance: 88.15625
+    m_GlyphRect:
+      m_X: 501
+      m_Y: 791
+      m_Width: 77
+      m_Height: 109
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
   m_CharacterTable:
   - m_ElementType: 1
     m_Unicode: 32
@@ -892,6 +922,14 @@ MonoBehaviour:
   - m_ElementType: 1
     m_Unicode: 121
     m_GlyphIndex: 92
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 85
+    m_GlyphIndex: 56
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 72
+    m_GlyphIndex: 43
     m_Scale: 1
   m_AtlasTextures:
   - {fileID: 28981121099961358}
@@ -1051,6 +1089,14 @@ MonoBehaviour:
     m_Y: 520
     m_Width: 98
     m_Height: 130
+  - m_X: 428
+    m_Y: 650
+    m_Width: 98
+    m_Height: 130
+  - m_X: 490
+    m_Y: 780
+    m_Width: 98
+    m_Height: 130
   m_FreeGlyphRects:
   - m_X: 98
     m_Y: 130
@@ -1064,10 +1110,6 @@ MonoBehaviour:
     m_Y: 1014
     m_Width: 1023
     m_Height: 9
-  - m_X: 490
-    m_Y: 0
-    m_Width: 533
-    m_Height: 1023
   - m_X: 36
     m_Y: 993
     m_Width: 987
@@ -1084,10 +1126,18 @@ MonoBehaviour:
     m_Y: 130
     m_Width: 564
     m_Height: 260
-  - m_X: 428
-    m_Y: 650
-    m_Width: 595
-    m_Height: 130
+  - m_X: 490
+    m_Y: 0
+    m_Width: 533
+    m_Height: 650
+  - m_X: 526
+    m_Y: 0
+    m_Width: 497
+    m_Height: 780
+  - m_X: 588
+    m_Y: 0
+    m_Width: 435
+    m_Height: 1023
   m_fontInfo:
     Name: Electronic Highway Sign
     PointSize: 144
