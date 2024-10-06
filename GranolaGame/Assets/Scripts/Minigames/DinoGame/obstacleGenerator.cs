@@ -7,11 +7,6 @@ public class ObstacleGenerator : MonoBehaviour
     public GameObject obstacle;
     public GameObject flyObstacle;
 
-    public float speed = 12;
-
-    [SerializeField]
-    float speedMult;
-
     //starts game by generating an obstacle
     private void Awake()
     {
