@@ -227,7 +227,7 @@ public class Manager : MonoBehaviour
                 oneshotPlayer.PlayOneShot((AudioClip)Resources.Load("Music/Global/Game Over Stinger"));
                 if(PlayerPrefs.GetInt("High Score") < score)
                 {
-                    PlayerPrefs.SetInt("High Score", score);
+                    PlayerPrefs.SetInt("Highscore", score);
                 }
             }
             else

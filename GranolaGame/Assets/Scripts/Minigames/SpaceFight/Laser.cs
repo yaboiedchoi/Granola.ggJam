@@ -25,7 +25,7 @@ public class Laser : MonoBehaviour
                                             UnityEngine.Random.Range(6f, 15f));
         //find their hitbox
         laser = GetComponent<Collider2D>();
-        laserSpeed = new Vector3(0f, UnityEngine.Random.Range(-3f, -1f), 0f);
+        laserSpeed = new Vector3(0f, UnityEngine.Random.Range(-6f, -2f), 0f);
     }
 
     // Update is called once per frame
