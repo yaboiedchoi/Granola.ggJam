@@ -851,8 +851,6 @@ MonoBehaviour:
   menuCanvas: {fileID: 1163599563}
   creditsCanvas: {fileID: 36109696}
   optionsCanvas: {fileID: 1330960545}
-  sfxVol: {fileID: 1227249768}
-  musicVol: {fileID: 1671058309}
 --- !u!4 &361842153
 Transform:
   m_ObjectHideFlags: 0
@@ -2240,7 +2238,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3004,7 +3002,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
